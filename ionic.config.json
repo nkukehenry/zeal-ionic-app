@@ -1,0 +1,7 @@
+{
+  "name": "zealpesa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
