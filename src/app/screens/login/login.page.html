@@ -1,0 +1,42 @@
+<ion-content>
+  <div class="top">
+    <h2 class="heading">
+      <span>{{ appName }}</span>
+      Distro
+    </h2>
+
+    <ion-slides  loop="true" pager="true" [options]="slideOptions"  >
+      <ion-slide>
+        <p>It is a long established fact that a reader will be distracted
+           by the readable content of a page when looking at its layout. 
+           Are you?.</p>
+      </ion-slide>
+      <ion-slide>
+        <p>There are many variations of passages of Lorem Ipsum available,
+           but the majority have suffered alteration in some form, by injected
+            humour. </p>
+      </ion-slide>
+    </ion-slides>
+
+  </div>
+  <div class="bottom">
+
+    <form #loginForm="ngForm">
+    <p class="error" *ngIf="(username.touched || username.dirty) && !username.valid">A valid username is required</p>
+    <ion-item>
+      <ion-label for="username" position="floating">Username</ion-label>
+      <ion-input minlength="6" type="email" #username="ngModel" name="login" [(ngModel)]="data.login" id="username" required></ion-input>
+      <ion-icon slot="end" name="person-outline"></ion-icon>
+    </ion-item>
+    <br>
+    <p class="error" *ngIf="(password.touched || password.dirty) && !password.valid">Provide a valid password</p>
+    <ion-item>
+      <ion-label for="password" position="floating">Password</ion-label>
+      <ion-input [type]="passType" minlength="4" #password="ngModel" name="password" [(ngModel)]="data.password" id="password" required></ion-input>
+      <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
+   </ion-item>
+    <br>
+    <ion-button color="secondary" (click)="doLogin()" [disabled]="!loginForm.valid" mode="ios" expand="block">LOGIN</ion-button>
+  </form>
+  </div>
+</ion-content>

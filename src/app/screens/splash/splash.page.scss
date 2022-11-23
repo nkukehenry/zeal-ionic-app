@@ -1,0 +1,27 @@
+.content{
+    background: #fff url(../../../assets/images/map.png) no-repeat center center / contain;
+    display: flex;
+    justify-content: center!important;
+    align-items: center!important;
+    min-height: 100vh;
+  
+    ion-img{
+      position: relative;
+      max-width: 45%;
+      margin: 0 auto;
+    }
+  
+    .footer-note{
+      display: flex;
+      position:absolute;
+      justify-content: center;
+      align-items: center;
+      bottom: 5px;
+      width: 100%;
+      color: grey;
+      font-weight: 100;
+    }
+
+   
+
+}

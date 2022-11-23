@@ -1,0 +1,63 @@
+<ion-content>
+
+    <div class="main_content_div">
+        
+        <div class="back_image" [style.backgroundImage]="'url(assets/images/map.png)'">
+            <div class="overlay_div">
+                <div class="user_back" [style.backgroundImage]="'url(assets/images/avatar.png)'"></div>
+                <ion-label class="name_lbl">Henry Nkuke</ion-label>
+                <ion-label class="white_lbl">henricsanyu@gmail.com</ion-label>
+            </div>
+        </div>
+
+        <div class="content_div">
+            
+            <div class="white_box" style="margin-top: -40px;">
+                <div class="item_div" (click)="goToAddresses()">
+                    <ion-icon name="location-sharp" class="first_icn"></ion-icon>
+                    <ion-label>My Account</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+                <div class="item_div" style="border: 0px;" (click)="goToAccount()">
+                    <ion-icon name="people" class="first_icn"></ion-icon>
+                    <ion-label>My Beneficiaries</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+            </div>
+
+            <div class="white_box">
+                <div class="item_div" (click)="goToReview()">
+                    <ion-icon name="star" class="first_icn"></ion-icon>
+                    <ion-label>Refferals</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+                <div class="item_div" (click)="goToWishlist()">
+                    <ion-icon name="heart" class="first_icn"></ion-icon>
+                    <ion-label>Currency Alerts</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+                <div class="item_div" (click)="goToNotification()">
+                    <ion-icon name="notifications" class="first_icn"></ion-icon>
+                    <ion-label>Notifications</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+                <div class="item_div" (click)="goToPassword()">
+                    <ion-icon name="key" class="first_icn"></ion-icon>
+                    <ion-label>Change Pasword</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+                
+                <div class="item_div" style="border: 0px;" (click)="logout()">
+                    <ion-icon name="power" class="first_icn"></ion-icon>
+                    <ion-label>Logout</ion-label>
+                    <ion-icon name="chevron-forward" class="last_icn"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+    </div>
+
+</ion-content>

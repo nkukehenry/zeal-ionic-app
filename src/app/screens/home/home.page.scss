@@ -1,0 +1,94 @@
+ion-content{
+    --background: (--ion-color-light);
+}
+.greeting{
+    background-image: url(../../../assets/images/dash.jpg);
+    background-size: cover;
+    min-width: 94%;
+    min-height: 13vh;
+    /*background-color: rgba(54, 11, 35, 0.849);*/
+    margin: 3%;
+    color: azure;
+    font-weight: lighter;
+    border-radius: 6px;
+    text-align: justify;
+    ion-row{
+        flex: 1;
+        padding: 1%;
+        border-radius: 6px;
+        background-color: rgba(11, 31, 54, 0.6);
+    }
+    ion-icon{
+        padding-right: 10px;
+    }
+}
+
+
+.title{
+  font-size: 15pt;
+  color: white;
+  font-weight: bold;
+  span{
+    color: var(--ion-color-secondary);
+    font-weight: lighter;
+  }
+}
+
+.dist{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  ion-img{
+    margin-bottom: -45%;
+  }
+}
+
+.rate-board{
+  .title{
+    padding-left: 3%;
+    font-size: 9pt;
+    color:grey;
+  }
+}
+
+.transactions{
+  padding: 10px;
+  padding-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  margin: 5px;
+  padding-bottom: 50px;
+}
+
+.widgets{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1%;
+  padding-bottom: 2%;
+  flex-wrap: wrap;
+  .widget{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    //var(--ion-color-primary);
+    padding: 10px;
+    background-color: white;
+    min-width: 30.333%;
+    max-width: 30.333%;
+    min-height: 70px;
+    margin: 1%;
+    ion-icon{
+      margin-bottom: 7px;
+      font-size: 15pt;
+      color: var(--ion-color-secondary);
+    }
+    span{
+      font-size: 0.8rem;
+    }
+  }
+}

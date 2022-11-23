@@ -1,0 +1,16 @@
+ion-content{
+    --background: transparent !important;
+}
+ion-card{
+    top: 5%;
+    min-height:50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+ion-card-content{
+    ion-img{
+        max-width: 80%;
+    }
+}
