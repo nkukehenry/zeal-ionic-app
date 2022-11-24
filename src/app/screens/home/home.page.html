@@ -26,16 +26,8 @@
 
   <div class="rate-board">
     <div class="title"><small><ion-icon name="reload-outline"></ion-icon> Last updated 2 minutes ago</small></div>
-    <app-currencypair *ngFor="let currency of [1,2,3,4,5,6]"></app-currencypair>
+    <app-currencypair *ngFor="let pair of mainPairs" [currencyPair]="pair"></app-currencypair>
   </div>
-
-  <div class="transactions">
-  <ion-list  lines="full">
-     <ion-list-header>Recent Orders</ion-list-header>
-     <app-transaction *ngFor="let transaction of orders" [transaction]="transaction"></app-transaction>
-  </ion-list>
-</div>
-
 
 </ion-content>
 

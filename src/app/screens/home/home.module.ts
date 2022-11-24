@@ -12,15 +12,14 @@ import { TransactionComponent } from 'src/app/components/transaction/transaction
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedModule
   ],
   declarations: [
-    HomePage,
-    CurrencypairComponent,
-    TransactionComponent]
+    HomePage
+  ]
 })
 export class HomePageModule { }

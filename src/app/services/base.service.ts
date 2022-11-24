@@ -11,8 +11,8 @@ import { LoadingController } from '@ionic/angular';
 
 export class BaseService {
 
-    public baseUrl = 'http://artisandistro.io/';
-    public oauthUrl = `${this.baseUrl}oauth/`;
+    public baseUrl = 'https://zealpesa.com/';
+    public oauthUrl = `${this.baseUrl}api/`;
     public apiUrl = `${this.baseUrl}api/`;
     user: any = {};
     constructor() {
@@ -31,7 +31,8 @@ export class BaseService {
     public getClientOrdersUrl = (id:any, limit:any) => `${this.apiUrl}report/client_Sales?id=${id}&limit=${limit}`;
     public postClientOrderUrl = () => `${this.apiUrl}sales`;
     public getClientOrderPaymentsUrl = (orderId:any) => `${this.apiUrl}sales/payments/${orderId}`;
-    public getResourcesUrl = () => `${this.apiUrl}resources`;
+    
+    public getResourcesUrl = () => `${this.apiUrl}forex/resources`;
 
     public handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

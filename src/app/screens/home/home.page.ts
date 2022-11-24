@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController, NavController, Platform, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { DataService } from 'src/app/services/data.service';
+import { ForexService } from 'src/app/services/forex/forex.service';
 import { TransactService } from 'src/app/services/transact/transact.service';
 import { UiService } from 'src/app/services/ui.service';
 
@@ -15,53 +16,53 @@ export class HomePage implements OnInit {
 
   exitcounter = 0;
   user: any   = {name:"Henry Nkuke"};
-  orders: any = [{"currency":"UGX/USD"}];
+  mainPairs: any = [];
   
   widgets = [
-    { name: 'Forex', icon: 'repeat-outline', link: 'forex' },
+    { name: 'Forex', icon: 'repeat-outline', link: 'tabs/tabs/forex' },
     { name: 'Remittances', icon: 'push-outline', link: 'remit' },
-    { name: 'Others', icon: 'qr-code-outline', link: '' }
+    { name: 'Others', icon: 'qr-code-outline', link: 'other-services' }
   ];
+
   constructor(
-    private menu: MenuController,
     private router: Router,
     private platform: Platform,
     private toastCtrl: ToastController,
     private navCtrl: NavController,
-    private authService: AuthenticationService,
     private dataService: DataService,
-    private tranService: TransactService,
+    private forexService: ForexService,
     private uiService: UiService
   ) { }
 
   ngOnInit() {
-    this.menu.enable(true);
-    //this.getTransactions();
+
+    this.getResources();
     this.handleBack();
-    //this.user = this.authService.user;
+
   }
 
-  toggleMenu() {
-    this.menu.toggle();
-  }
+  getResources() {
+    this.uiService.showLoader();
 
-  getTransactions() {
-    // this.uiService.showLoader();
-    // this.tranService.getTransactions(10).subscribe(response => {
-    //   this.uiService.hideLoader();
-    //   this.dataService.log(response);
-    //   this.orders = response.sales;
-    // }, error => {
-    //   this.uiService.hideLoader();
-    //   this.dataService.log(error);
-    // });
+    this.forexService.getResources().subscribe(response => {
+      this.uiService.hideLoader();
+     
+      this.dataService.log(response);
+
+      this.dataService.updateResources(response);
+
+      this.mainPairs = this.dataService.mainPairs;
+
+    }, error => {
+      this.uiService.hideLoader();
+      this.dataService.log(error);
+    });
   }
 
   handleBack() {
     this.platform.backButton.subscribeWithPriority(10, () => {
-     // this.dataService.log('Handler was called! on ' + this.router.url);
 
-      if (this.router.url === '/home' || this.router.url === '/login') {
+      if (this.router.url === '/tabs/home' || this.router.url === '/login' || this.router.url === '/register') {
         if (this.exitcounter < 1
         ) {
           this.exitcounter++;

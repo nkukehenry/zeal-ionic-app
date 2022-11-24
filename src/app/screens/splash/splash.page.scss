@@ -1,9 +1,14 @@
 .content{
-    background: #fff url(../../../assets/images/map.png) no-repeat center center / contain;
+    background: var(--ion-background-color) url(../../../assets/images/map.png) no-repeat center center / contain;
     display: flex;
+    flex-direction: column;
     justify-content: center!important;
     align-items: center!important;
     min-height: 100vh;
+
+    p{
+      color: rgb(169, 168, 168);
+    }
   
     ion-img{
       position: relative;

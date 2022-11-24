@@ -19,6 +19,10 @@ const MAIN_ROUTES = [
       {
         path: 'splash',
         loadChildren: () => import('../screens/splash/splash.module').then( m => m.SplashPageModule)
-      }
+      },
+      {
+        path: 'forex',
+        loadChildren: () => import('../screens/forex/forex.module').then(m => m.ForexPageModule)
+      },
 ];
 export default MAIN_ROUTES;

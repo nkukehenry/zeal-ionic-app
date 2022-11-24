@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Curency Exchange</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="rate-board">
+    <div class="title"><small><ion-icon name="reload-outline"></ion-icon> Last updated 2 minutes ago</small></div>
+    <app-currencypair *ngFor="let pair of mainPairs" [currencyPair]="pair"></app-currencypair>
+  </div>
+</ion-content>
+

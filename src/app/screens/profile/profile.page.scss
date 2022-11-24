@@ -1,5 +1,5 @@
 ion-content {
-    --background: #f3f3f3;
+    --background: var(--ion-background-color);
 }
 .main_content_div {
     width: 100%;

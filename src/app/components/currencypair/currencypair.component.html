@@ -2,16 +2,16 @@
   <div class="top">
     <ion-row>
       <ion-col size="4">
-        <span class="currency_symbol">USD</span>
-        <span class="currency_name">US Dollar</span>
+        <span class="currency_symbol"><img class="flag" src="{{'data:image/jpg;base64,' + currencyPair.quote_currency.country.flag}}" /> {{ currencyPair.quote_currency.code }}</span>
+        <span class="currency_name">{{ currencyPair.quote_currency.name }}</span>
       </ion-col>
       <ion-col size="4">
         <span class="price_label">WE BUY</span>
-        <span class="price_amount">UGX 3,800</span>
+        <span class="price_amount">{{ currencyPair.base_currency.symbol }} {{ currencyPair.buying_price }}</span>
       </ion-col>
       <ion-col size="4">
         <span class="price_label">WE SELL</span>
-        <span class="price_amount">UGX 3,830</span>
+        <span class="price_amount">{{ currencyPair.base_currency.symbol }} {{ currencyPair.buying_price }}</span>
       </ion-col>
     </ion-row>
     

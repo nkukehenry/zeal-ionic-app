@@ -1,13 +1,12 @@
 ion-content{
    display: flex;
-   --background: url(../../../assets/images/auth-bg.jpg) no-repeat;
+   --background: var(--ion-background-color) url(../../../assets/images/auth-bg.jpg) no-repeat;
    background-position: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 0px!important;
     margin-bottom: 0px!important;
-
    
     .top{
       display: flex;
