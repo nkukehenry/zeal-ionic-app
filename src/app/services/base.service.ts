@@ -22,17 +22,12 @@ export class BaseService {
 
     //Endpoints
     //auth
-    public postRegistrationUrl = () => `${this.baseUrl}user/register`;
-    public getTokenUrl = () => `${this.oauthUrl}token`;
-    // eslint-disable-next-line max-len
-    public getProductsUrl = (limit:any, SortField:any, SortType:any, search:any) => `${this.apiUrl}Products?limit=${limit}&SortField=${SortField}&SortType=${SortType}&search=${search}`;
-    public getProductDetailsUrl = (id:any) => `${this.apiUrl}Products/Detail/${id}`;
-    public getClientPaymentsUrl = (id:any) => `${this.apiUrl}report/client_payments`;
-    public getClientOrdersUrl = (id:any, limit:any) => `${this.apiUrl}report/client_Sales?id=${id}&limit=${limit}`;
-    public postClientOrderUrl = () => `${this.apiUrl}sales`;
-    public getClientOrderPaymentsUrl = (orderId:any) => `${this.apiUrl}sales/payments/${orderId}`;
+    public postRegistrationUrl = () => `${this.baseUrl}client/register`;
+    public getLoginUrl = () => `${this.baseUrl}client/login`;
     
-    public getResourcesUrl = () => `${this.apiUrl}forex/resources`;
+    public getResourcesUrl   = ()    => `${this.apiUrl}forex/resources`;
+    public getTransactionsUrl = ()   => `${this.apiUrl}transaction`;
+    public postClientOrderUrl = ()   => `${this.apiUrl}transaction/order`;
 
     public handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

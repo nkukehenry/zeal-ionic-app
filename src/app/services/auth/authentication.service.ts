@@ -29,7 +29,7 @@ export class AuthenticationService extends BaseService {
   }
 
   ifLoggedIn() {
-    this.dataService.getCache('DISTRO_USER_INFO').then((response) => {
+    this.dataService.getCache('ZEAL_USER_INFO').then((response) => {
       if (response) {
         this.user = response;
         this.authState.next(true);
@@ -44,6 +44,7 @@ export class AuthenticationService extends BaseService {
         catchError(this.handleError('remoteRegister', []))
       );
   }
+  
   remoteLogin(username = 'admin@example.com', password = '123456'): Observable<any> {
     const request = {
       grant_type: "password",
@@ -52,7 +53,7 @@ export class AuthenticationService extends BaseService {
       username: username,
       password: password
     };
-    return this.http.post(this.getTokenUrl(), request)
+    return this.http.post(this.getLoginUrl(), request)
       .pipe(
         tap(_ => this.log('response received')),
         catchError(this.handleError('remoteLogin', []))
@@ -60,7 +61,7 @@ export class AuthenticationService extends BaseService {
   }
 
   saveProfileDEdit(request:any): Observable<any> {
-    return this.http.post(this.getTokenUrl(), request)
+    return this.http.post(this.getLoginUrl(), request)
       .pipe(
         tap(_ => this.log('response received')),
         catchError(this.handleError('saveProfileDEdit', []))
@@ -68,21 +69,21 @@ export class AuthenticationService extends BaseService {
   }
 
   getIn(userdata:any) {
-    this.user = userdata;
-    this.user.collegeId = userdata.default_college_id;
-    this.user.id = userdata.user_id;
-    this.user.course = userdata.default_course_id;
 
-    window.localStorage.setItem('DISTRO_USER_INFO', JSON.stringify(this.user));
-    const user = window.localStorage.getItem('DISTRO_USER_INFO');
-    this.dataService.cacheData('DISTRO_USER_INFO', this.user).then((response) => {
+    this.user    = userdata;
+    this.user.id = userdata.user_id;
+
+    window.localStorage.setItem('ZEAL_USER_INFO', JSON.stringify(this.user));
+
+    const user = window.localStorage.getItem('ZEAL_USER_INFO');
+    this.dataService.cacheData('ZEAL_USER_INFO', this.user).then((response) => {
       this.router.navigate(['home']);
       this.authState.next(true);
     });
   }
 
   logout() {
-    this.dataService.clearCache('DISTRO_USER_INFO').then(() => {
+    this.dataService.clearCache('ZEAL_USER_INFO').then(() => {
       this.router.navigate(['']);
       this.authState.next(false);
     });

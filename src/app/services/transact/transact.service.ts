@@ -14,7 +14,7 @@ export class TransactService extends BaseService {
   }
 
   getTransactions(limit = 25, id = 1): Observable<any> {
-    return this.http.get(this.getClientOrdersUrl(id, limit))
+    return this.http.get(this.getTransactionsUrl())
       .pipe(
         tap(_ => this.log('response received')),
         catchError(this.handleError('getTransactions', []))
