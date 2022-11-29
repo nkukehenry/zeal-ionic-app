@@ -1,0 +1,126 @@
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+.main_content_div {
+  width: 100%;
+  background-repeat: no-repeat;
+
+  ion-label {
+      display: block;
+  }
+
+  .back_image {
+      width: 100%;
+      height: 25vh;
+      background-position: center;
+      background-size: cover;
+
+      .overlay_div {
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.7);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-top: 10%;
+
+         
+
+          .user_back {
+              height: 80px;
+              width: 80px;
+              border-radius: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+              margin-top: 16px;
+          }
+          .name_lbl {
+              font-family: 'semi-bold';
+              color: white;
+              margin-top: 10px;
+              font-size: 1.3rem;
+          }
+          .white_lbl {
+              color: white;
+              width: 70%;
+              text-align: center;
+              font-size: 1.3rem;
+              padding-bottom: 10px;
+          }
+
+      }
+  }
+
+  .content_div {
+      padding: 10px;
+
+      .white_box {
+          background: white;
+          border-radius: 10px;
+          padding-left: 16px;
+          padding-right: 16px;
+          margin-bottom: 16px;
+          
+
+          .status{
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            ion-chip {
+                --background: #00213f;
+                --color: #adefd1;
+                padding-left: 50px;
+                padding-right: 50px;
+                text-transform: uppercase;
+              }
+
+          }
+          
+  
+          .item_div {
+              padding-top: 16px;
+              padding-bottom: 5px;
+              border-bottom: 1px solid #CBCBCB;
+              display: flex;
+              flex-direction: column;
+              position: relative;
+  
+             
+              ion-label{
+                  margin-left: 10px;
+                  color: #949292;
+              }
+
+              p {
+                margin-left: 10px;
+                color: #1c1b1b;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+                padding-top: 5px;
+                margin-top: 0px;
+              }
+              .last_icn {
+                  font-size: 20px;
+                  color: var(--ion-color-primary);
+                  position: absolute;
+                  right: 0;
+              }
+          }
+      }
+  }
+}
+
+h5,small{
+    color: var(--ion-color-primary);
+}
+
+.wrapper{
+
+    border-bottom: 2px var(--ion-color-primary) solid;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}

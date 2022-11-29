@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, NavController, Platform, ToastController } from '@ionic/angular';
-import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { MenuController, ModalController, NavController, Platform, ToastController } from '@ionic/angular';
+import { TranDetailComponent } from 'src/app/components/trandetail/trandetail.component';
 import { DataService } from 'src/app/services/data.service';
 import { TransactService } from 'src/app/services/transact/transact.service';
 import { UiService } from 'src/app/services/ui.service';
@@ -13,22 +13,24 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class HistoryPage implements OnInit {
 
-  exitcounter = 0;
-  
-  mainPairs = [];
+  transactions = [];
+
   constructor(
     private menu: MenuController,
     private router: Router,
     private platform: Platform,
     private toastCtrl: ToastController,
     private navCtrl: NavController,
-    private authService: AuthenticationService,
+    private uiService: UiService,
     private dataService: DataService,
-    private transactService: TransactService
+    private transactService: TransactService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
-    this.mainPairs = this.dataService.mainPairs;
+
+    this.transactions = this.dataService.transactions;
+    this.getTransactions();
   }
 
  goTo(link:any) {
@@ -36,9 +38,12 @@ export class HistoryPage implements OnInit {
   }
 
   getTransactions(){
-
+    this.uiService.showLoader();
     this.transactService.getTransactions(20,1).subscribe((response)=>{
-     
+      this.uiService.hideLoader();
+      this.transactions = response;
+      this.dataService.transactions = response;
+
       console.log(response);
 
     },(error)=>{
@@ -47,8 +52,31 @@ export class HistoryPage implements OnInit {
 
   }
 
+
+  handleRefresh(event:any){
+    this.getTransactions();
+    event.target.complete();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+
+  }
+
   log(msg:any, key = '') {
     console.log(key, msg);
+  }
+
+
+  async showDetails(transaction:any){
+
+    const modal = await this.modalController.create({
+      component: TranDetailComponent,
+      componentProps:{transaction:transaction}
+    });
+
+    await modal.present();
+    
   }
 
 }

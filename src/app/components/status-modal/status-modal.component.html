@@ -1,8 +1,10 @@
 <ion-content>
-<ion-card>
-<ion-card-content>
-     <ion-img src="../../../assets/images/success.png"> </ion-img>
-     <h3 class="small-pad"><span>{{ status.message || 'Action completed successfully' }}</span></h3>
-</ion-card-content>
-</ion-card>
+<div class="wrapper">
+
+     <ion-img  *ngIf="status.status" src="../../../assets/images/success.svg"> </ion-img>
+     <ion-img  *ngIf="!status.status" src="../../../assets/images/failed.svg"> </ion-img>
+     <h3 class="desc" *ngIf="status.status"><span>{{ status.message || 'Action completed successfully' }}</span></h3>
+     <h3 class="desc" *ngIf="!status.status"><span>{{ status.message || "Action couldn't be completed" }}</span></h3>
+     <ion-buttton expand="full" (click)="closeModal()" color="secondary">CLOSE</ion-buttton>
+</div>
 </ion-content>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  
+  <div class="form">
+
+    <form #regForm="ngForm">
+    <p class="error" *ngIf="(firstname.touched || firstname.dirty) && !firstname.valid">A valid firstname is required</p>
+    <ion-item>
+      <ion-label for="firstname" position="floating">First Name</ion-label>
+      <ion-input minlength="6" type="text" #firstname="ngModel" name="firstname" [(ngModel)]="data.firstname" id="firstname" required></ion-input>
+      <ion-icon slot="end" name="person-outline"></ion-icon>
+    </ion-item>
+    <br>
+
+    <p class="error" *ngIf="(lastname.touched || lastname.dirty) && !lastname.valid">A valid lastname is required</p>
+    <ion-item>
+      <ion-label for="lastname" position="floating">Last Name</ion-label>
+      <ion-input minlength="6" type="text" #lastname="ngModel" name="lastname" [(ngModel)]="data.lastname" id="lastname" required></ion-input>
+      <ion-icon slot="end" name="person-outline"></ion-icon>
+    </ion-item>
+    <br>
+
+    
+    <p class="error" *ngIf="(email.touched || email.dirty) && !email.valid">A valid email is required</p>
+    <ion-item>
+      <ion-label for="email" position="floating">Email</ion-label>
+      <ion-input minlength="6" type="text" #email="ngModel" name="email" [(ngModel)]="data.email" id="email" required></ion-input>
+      <ion-icon slot="end" name="mail-outline"></ion-icon>
+    </ion-item>
+    <br>
+
+    <p class="error" *ngIf="(phone.touched || phone.dirty) && !phone.valid">A valid phone number is required</p>
+    <ion-item>
+      <ion-label for="phone" position="floating">Phone Number</ion-label>
+      <ion-input minlength="6" type="text" #phone="ngModel" name="phone" [(ngModel)]="data.phone" id="phone" required></ion-input>
+      <ion-icon slot="end" name="call-outline"></ion-icon>
+    </ion-item>
+    <br>
+
+    <p class="error" *ngIf="(password.touched || password.dirty) && !password.valid">Provide a valid password</p>
+    <ion-item>
+      <ion-label for="password" position="floating">Password</ion-label>
+      <ion-input [type]="passType" minlength="4" #password="ngModel" name="password" [(ngModel)]="data.password" id="password" required></ion-input>
+      <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
+   </ion-item>
+    <br>
+    <ion-button color="primary" (click)="doRegister()" [disabled]="!regForm.valid" mode="ios" expand="block">Register</ion-button>
+  </form>
+  </div>
+</ion-content>

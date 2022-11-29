@@ -17,18 +17,18 @@ import { AuthenticationService } from '../services/auth/authentication.service';
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
   loaderToShow: any;
-  constructor(public uiService: UiService, private authService: AuthenticationService) { }
+  constructor(public uiService: UiService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
     //Authentication by setting header with token value
-    if (this.authService.authToken) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.authService.authToken}`
-        }
-      });
-    }
+    // if (this.authService.authToken) {
+    //   request = request.clone({
+    //     setHeaders: {
+    //       Authorization: `Bearer ${this.authService.authToken}`
+    //     }
+    //   });
+    // }
 
     if (!request.headers.has('Content-Type')) {
       request = request.clone({
@@ -59,7 +59,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
       }));
   }
 
-  log(message) {
+  log(message:any) {
     console.log(message);
   }
 

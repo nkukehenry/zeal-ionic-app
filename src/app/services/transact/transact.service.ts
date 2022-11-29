@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -22,7 +22,11 @@ export class TransactService extends BaseService {
   }
 
   postOrder(request: any): Observable<any> {
-    return this.http.post(this.postClientOrderUrl(), request)
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/form-data');
+
+    return this.http.post(this.postClientOrderUrl(), request,{headers:headers})
       .pipe(
       tap(_ => this.log('response received')),
         catchError(this.handleError('getTransactions', []))

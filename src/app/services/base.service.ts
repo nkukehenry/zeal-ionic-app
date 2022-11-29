@@ -22,8 +22,8 @@ export class BaseService {
 
     //Endpoints
     //auth
-    public postRegistrationUrl = () => `${this.baseUrl}client/register`;
-    public getLoginUrl = () => `${this.baseUrl}client/login`;
+    public postRegistrationUrl = () => `${this.apiUrl}account/register`;
+    public getLoginUrl = () => `${this.apiUrl}account/login`;
     
     public getResourcesUrl   = ()    => `${this.apiUrl}forex/resources`;
     public getTransactionsUrl = ()   => `${this.apiUrl}transaction`;

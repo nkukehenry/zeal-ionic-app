@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Choose  source of funds</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal(false)"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="filtered.length<1">
+
+    <ion-item (click)="closeModal(source)" *ngFor="let source of sources">
+  
+      <div class="app-source">
+        <h4>{{ source.description }}</h4>
+      </div>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="filtered.length>0">
+
+    <ion-item (click)="closeModal(source)" *ngFor="let source of filtered">
+      
+      <div class="app-source">
+        <h4></h4>
+      </div>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

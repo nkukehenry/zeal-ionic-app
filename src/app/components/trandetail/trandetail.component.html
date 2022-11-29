@@ -1,0 +1,84 @@
+<ion-header translucent>
+    <ion-toolbar color="primary">
+      <ion-title>Transaction Details</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()"><ion-icon class="text-danger" name="close-outline"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+    <div class="main_content_div">
+        
+        <div class="back_image" [style.backgroundImage]="'url(assets/images/dash.jpg)'">
+            <div class="overlay_div">
+               <ion-label class="name_lbl">{{ getBaseLabel(true) }} <ion-icon name="arrow-redo-outline"></ion-icon> {{ getEquivalentLabel(true) }}</ion-label>
+               <ion-label class="white_lbl">UGX 1,000,000</ion-label>
+            </div>
+        </div>
+
+        <div class="content_div">
+            
+            <div class="white_box" style="margin-top: -50px;">
+
+                <div class="status">
+                   <ion-chip>{{transaction.tran_status}}</ion-chip>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Transaction ID</ion-label>
+                    <p class="text-primary">{{ transaction.transaction_ref }}</p>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Funds Transfered via</ion-label>
+                    <p class="text-primary">
+                        Channel: {{ transaction.bank_account.account_type.description }}<br>
+                        Name: {{ transaction.bank_account.name }} <br>
+                        {{transaction.bank_account.bank.type.account_field_label}} :{{ transaction.bank_account.account_number }}
+                    </p>
+                </div>
+                
+                <div class="item_div">
+                    <ion-label>Rate Booked</ion-label>
+                    <p>{{ getBaseLabel() }}1  = {{ getEquivalentLabel() }} {{ transaction.price_booked | number }}</p>
+                </div>
+                <div class="item_div">
+                    <ion-label>Amount</ion-label>
+                    <p>{{ getBaseLabel() }} {{ transaction.base_amount | number }}</p>
+                </div>
+                <div class="item_div">
+                    <ion-label>Transaction Fee</ion-label>
+                    <p>{{ getEquivalentLabel() }} {{ transaction.service_charge | number  }}</p>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Exchange Equivalent</ion-label>
+                    <p>{{ getEquivalentLabel() }} {{ calculateEquivalent() | number  }}</p>
+                </div>
+
+                <h5 *ngIf="(transaction.transcation_splits.length>0)">Disbursement Schedule</h5>
+
+                <div *ngFor="let split of transaction.transcation_splits; let i = index" [class]="((transaction.transcation_splits.length>1)?'wrapper':'')">
+                    <small>Payment #{{ (i+1) }}:</small>
+                    <div class="item_div">
+                        <ion-label>Amount</ion-label>
+                        <p>{{ getEquivalentLabel() }} {{ split.amount | number  }}</p>
+                    </div>
+                    <div class="item_div">
+                        <ion-label>Bank/Institution</ion-label>
+                        <p>{{ split.bank.name  }}</p>
+                    </div>
+                    <div class="item_div">
+                        <ion-label>Beneficiary Account</ion-label>
+                        <p>{{ split.beneficiary_account  }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+</ion-content>

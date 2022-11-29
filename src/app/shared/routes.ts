@@ -24,5 +24,13 @@ const MAIN_ROUTES = [
         path: 'forex',
         loadChildren: () => import('../screens/forex/forex.module').then(m => m.ForexPageModule)
       },
+      {
+        path: 'register',
+        loadChildren: () => import('../screens/register/register.module').then(m => m.RegisterPageModule)
+      },
+      {
+        path: 'exchange',
+        loadChildren: () => import('../screens/exchange/exchange.module').then(m => m.ExchangePageModule)
+      }
 ];
 export default MAIN_ROUTES;

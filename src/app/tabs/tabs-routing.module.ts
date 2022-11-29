@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../screens/forex/forex.module').then(m => m.ForexPageModule)
       },
       {
+        path: 'history',
+        loadChildren: () => import('../screens/history/history.module').then(m => m.HistoryPageModule)
+      },
+      {
         path: '',
         redirectTo: 'tabs/home',
         pathMatch: 'full'

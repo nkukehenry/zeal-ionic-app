@@ -7,10 +7,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Toast } from '@awesome-cordova-plugins/toast/ngx';
 import { Drivers } from '@ionic/storage';
 import { StatusModalComponent } from './components/status-modal/status-modal.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { AppHttpInterceptor } from './shared/app-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { StatusModalComponent } from './components/status-modal/status-modal.com
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    CurrencyMaskModule,
     IonicStorageModule.forRoot({
       name: 'zealpesa',
       driverOrder: [Drivers.IndexedDB] // , Drivers.LocalStorage
@@ -30,7 +33,8 @@ import { StatusModalComponent } from './components/status-modal/status-modal.com
   providers: [
     Storage,
     Toast,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

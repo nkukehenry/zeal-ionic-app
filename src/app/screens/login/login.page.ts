@@ -15,18 +15,10 @@ export class LoginPage implements OnInit {
   exitcounter = 0;
   isNewForm = true;
   passType = 'password';
-  appName = 'Artisan';
-  user = {
-    name: 'Henry Mayanja',
-    id: 100,
-    address: 'Kampala, Uganda',
-    account: 764764,
-    vehicle: 'UAS 4456H'
-  };
 
   slideOptions = {
     initialSlide: 0,
-    autoplay: true.valueOf,
+    autoplay: true,
   };
 
   constructor(
@@ -81,17 +73,14 @@ export class LoginPage implements OnInit {
   }
 
   doLogin() {
-    // this.authService.getIn(this.user);
 
     this.uiService.showLoader();
-    //this.data
-    this.authService.remoteLogin().subscribe(
+
+    this.authService.remoteLogin(this.data).subscribe(
       (response) => {
         this.uiService.hideLoader();
-        if (response?.access_token) {
-          this.data.password = '';
-          this.authService.authToken = response.access_token;
-          this.authService.getIn(this.user);
+        if (response?.data) {
+          this.authService.getIn(response.data);
         }
       }, error => {
         this.uiService.hideLoader();

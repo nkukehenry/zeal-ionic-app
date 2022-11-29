@@ -1,0 +1,46 @@
+<ion-content>
+
+    <h3>We collect the following</h3>
+    <ul>
+        <li>Names</li>
+        <li>Phone Number</li>
+        <li>Email Address</li>
+        <li>Your Address/Location</li>
+        <li>National ID Number</li>
+        <li>Photo</li>
+        <li>ID Pictures</li>
+     </ul>
+
+     <h3>How we use your data</h3>
+     <div class="content">
+          <p>We collect your names,email address,phone number,address,national id  and your photos.
+         We are required to collect this data to help in verifying your identity before we can provide any services to you  as required by our regulatory authority.
+          </p>
+          <p> Your Phone number and email are collected so that we can easily alert you in case of any changes,
+          offers or improvements, transaction alerts and account management and verification alerts.
+          </p>
+          <p> Your National ID and photos are collected for verification of identity and as part of regulatory requirements.These provide reasonable level of knowledge about who our agents/customers are and help in fraud control and investigation, in case of any such scenario.
+        </p>
+    </div>
+     <h3>We don't share your data with anyone.</h3>
+
+     <br>
+
+</ion-content>
+
+<ion-footer >
+    <ion-toolbar color="primary" class="ion-padding-horizontal">
+      <ion-row>
+          <ion-col (click)="cancelRegistration()">
+        <div class="ion-text-center">
+            Cancel
+        </div>
+    </ion-col>
+    <ion-col style="border-left: 1px solid #fff;" (click)="acceptPolicy()">
+        <div class="ion-text-center">
+            Continue
+         </div>
+    </ion-col>
+    </ion-row>
+    </ion-toolbar>
+  </ion-footer>

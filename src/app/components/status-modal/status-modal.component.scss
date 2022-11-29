@@ -1,16 +1,26 @@
 ion-content{
     --background: transparent !important;
+    opacity: 0.9;
 }
-ion-card{
+.wrapper{
     top: 5%;
-    min-height:50%;
+    min-height:100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity: 0.9;
+    background: url(../../../assets/images/map.png) bottom no-repeat;
 }
-ion-card-content{
-    ion-img{
-        max-width: 80%;
-    }
+.desc{
+    padding: 10%;
+    font-size: 1rem;
+}
+
+ion-buttton{
+    margin-top: 50px;
+}
+
+ion-img{
+    max-width: 40%;
 }

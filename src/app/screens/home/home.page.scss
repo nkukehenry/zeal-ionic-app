@@ -1,5 +1,5 @@
 ion-content{
-    --background: (--ion-color-light);
+    --background: var(--ion-background-color);;
 }
 .greeting{
     background-image: url(../../../assets/images/dash.jpg);

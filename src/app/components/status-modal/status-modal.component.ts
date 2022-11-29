@@ -9,15 +9,20 @@ import { ModalController } from '@ionic/angular';
 export class StatusModalComponent implements OnInit {
 
   @Input() status:any;
+
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
-    console.log(status);
+    console.log(this.status);
 
     setTimeout(() => {
       this.modalController.dismiss();
-    }, 2000);
+    }, 3000);
     
+  }
+
+  closeModal(){
+    this.modalController.dismiss();
   }
 
 }

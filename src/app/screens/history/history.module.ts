@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HistoryPageRoutingModule } from './history-routing.module';
 import { HistoryPage } from './history.page';
 import { SharedModule } from 'src/app/shared/shared-module/shared.module';
-import { CurrencypairComponent } from 'src/app/components/currencypair/currencypair.component';
-import { TransactionComponent } from 'src/app/components/transaction/transaction.component';
 
 @NgModule({
   imports: [

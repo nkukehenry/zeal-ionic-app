@@ -31,3 +31,54 @@ ion-content {
   ion-content::part(scroll) {
     padding-right: 15px;
   }
+
+.error{
+  font-size: 0.7rem;
+  color: red;
+}
+
+.loading-content ,.sc-ion-loading-ios{
+  padding: 10px;
+}
+
+
+.loading{
+  --background: none;
+  .loading-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: none !important;
+      -webkit-box-shadow:none !important;
+      color: white!important;
+  }
+}
+
+fieldset{
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  legend{
+    color: var(--ion-color-primary);
+  }
+}
+
+.text-bold{
+
+  font-weight: bolder;
+}
+
+.text-success{
+  color: green;
+}
+
+.text-grey{
+  color: rgb(72, 72, 72);
+}
+
+.text-primary{
+  color: var(--ion-color-primary);
+}

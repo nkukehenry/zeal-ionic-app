@@ -44,15 +44,9 @@ export class AuthenticationService extends BaseService {
         catchError(this.handleError('remoteRegister', []))
       );
   }
-  
-  remoteLogin(username = 'admin@example.com', password = '123456'): Observable<any> {
-    const request = {
-      grant_type: "password",
-      client_id: '2',
-      client_secret: "dXdWO1A8DG5TGdumiUVDXu2ovxCxFw3gPCsrsWhX",
-      username: username,
-      password: password
-    };
+
+  remoteLogin(request:any): Observable<any> {
+    
     return this.http.post(this.getLoginUrl(), request)
       .pipe(
         tap(_ => this.log('response received')),
@@ -71,14 +65,16 @@ export class AuthenticationService extends BaseService {
   getIn(userdata:any) {
 
     this.user    = userdata;
-    this.user.id = userdata.user_id;
+    this.user.id = userdata.id;
 
     window.localStorage.setItem('ZEAL_USER_INFO', JSON.stringify(this.user));
 
     const user = window.localStorage.getItem('ZEAL_USER_INFO');
     this.dataService.cacheData('ZEAL_USER_INFO', this.user).then((response) => {
-      this.router.navigate(['home']);
+
+      this.router.navigate(['tabs']);
       this.authState.next(true);
+      
     });
   }
 

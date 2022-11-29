@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Currency Exchange</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  
+  <div class="form">
+
+    <form #regForm="ngForm">
+      <small class="text-bold">You are {{exchangePair.isSelling?'Selling':'Buying'}} {{exchangePair.quote_currency.name}}</small>
+      <h3 class="text-success">1 {{exchangePair.quote_currency.code}} =  {{exchangePair.base_currency.symbol}} {{exchangePair.selling_price | number}}</h3>
+      
+      <p class="error" *ngIf="(amount.touched || amount.dirty) && !amount.valid">A valid amount is required</p>
+    <ion-item>
+      <ion-label for="amount" position="stacked">
+        <ion-icon name="cash-outline"></ion-icon> 
+        ENTER AMOUNT ({{ getBaseLabel() }})</ion-label>
+      <ion-input 
+        minlength="2" type="tel" 
+        #amount="ngModel" name="amount" 
+       (keyup)="calculateEquivalent()" 
+       [(ngModel)]="data.amount"
+       currencyMask 
+        id="amount" required></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="data.equivalent>0" lines="full">
+      <ion-label for="amount" position="stacked" class="text-bold"><ion-icon name="cash-outline"></ion-icon> YOU RECEIVE</ion-label>
+      <h3 class="text-success text-bold">{{ getEquivalentLabel() }} {{data.equivalent | number}}</h3>
+    </ion-item>
+
+    <br>
+
+    <ion-item (click)="chooseFundsSource()">
+      <ion-label *ngIf="!data.funds_source">Source of funds</ion-label>
+      <ion-label *ngIf="data.funds_source">{{data.funds_source.description}}</ion-label>
+      <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+    </ion-item>
+
+    <br>
+
+  <fieldset>
+      <legend>Funds Transfer to Zeal Pesa</legend>
+    
+      <ion-item (click)="chooseChannel()">
+        <ion-label *ngIf="!data.channel">Send Funds Through</ion-label>
+        <ion-label *ngIf="data.channel">{{data.channel.name}}</ion-label>
+        <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+      </ion-item>
+
+      <br>
+      
+      <small>Choose your bank</small>
+      <ion-item (click)="chooseBank()">
+        <ion-label *ngIf="!data.bank">Bank/Institution</ion-label>
+        <ion-label *ngIf="data.bank">{{data.bank.name}}</ion-label>
+        <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+      </ion-item>
+
+      <small>Transfer Option</small>
+      <ion-item (click)="chooseTransferOption()">
+        <ion-label *ngIf="!data.tranferOption">Choose Transfer Option</ion-label>
+        <ion-label *ngIf="data.tranferOption">{{data.tranferOption.option_name}}</ion-label>
+        <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+      </ion-item>
+
+      <div *ngIf="accounts.length>0">
+        <h5>Choose Account</h5>
+      <ion-card  *ngFor="let account of accounts" >
+        <ion-card-content (click)="chooseZealAccount(account)" [class]="(account.selected)?'selected':''">
+          <h5>{{ account?.name || '' }}</h5>
+          <h6>{{ account?.account_number || ''}}</h6>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+      <br>
+  </fieldset>
+
+  <fieldset class="flexed">
+    <legend>Proof of funds transfer</legend>
+    <p class="text-grey">Attach bank proof of transfer</p>
+    <ion-img (click)="getImage()" class="attachment" [src]="filePreview"></ion-img>
+    <br>
+</fieldset>
+
+  <fieldset>
+    <legend>Funds to You</legend>
+    <p class="text-grey">How do you want to receive your funds?</p>
+    <ion-item (click)="chooseChannel(true)">
+      <ion-label *ngIf="!data.disburseChannel">Receive Funds Through</ion-label>
+      <ion-label *ngIf="data.disburseChannel">{{data.disburseChannel.name}}</ion-label>
+      <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+    </ion-item>
+
+    <br>
+
+    <ion-item (click)="chooseBank(true)">
+      <ion-label *ngIf="!data.disburseBank">Bank/Institution</ion-label>
+      <ion-label *ngIf="data.disburseBank">{{data.disburseBank.name}}</ion-label>
+      <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+    </ion-item>
+
+    <ion-item (click)="choosePurpose()">
+      <ion-label *ngIf="!data.funds_purpose">Purpose of funds</ion-label>
+      <ion-label *ngIf="data.funds_purpose">{{data.funds_purpose.description}}</ion-label>
+      <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+    </ion-item>
+
+    <br>
+</fieldset>
+
+<br>
+    <ion-button color="primary" (click)="submitOrder()" [disabled]="!regForm.valid" mode="ios" expand="block">Continue</ion-button>
+  </form>
+  </div>
+</ion-content>

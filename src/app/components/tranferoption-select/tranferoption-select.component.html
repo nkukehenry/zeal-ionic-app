@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Choose  Tranfer Option</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal(false)"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="filtered.length<1">
+
+    <ion-item (click)="closeModal(tranferoption)" *ngFor="let tranferoption of tranferoptions">
+  
+      <div class="app-tranferoption">
+        <h4>{{ tranferoption.option_name }}</h4>
+      </div>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="filtered.length>0">
+
+    <ion-item (click)="closeModal(tranferoption)" *ngFor="let tranferoption of filtered">
+      
+      <div class="app-tranferoption">
+        <h4></h4>
+      </div>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

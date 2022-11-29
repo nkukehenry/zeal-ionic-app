@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class DataService {
-
+  public transactions = [];
   public mainPairs: any  = [];
   public crossPairs: any = [];
   public accounts: any = [];
@@ -19,8 +19,8 @@ export class DataService {
   public defaultCurrencyId:any;
   public isOpen:Boolean=false;
   public appData: any = {};
+  public exchangePair = {};
   
-
 
   public preFix = "ZEAL-";
 

@@ -21,12 +21,17 @@ export class UiService {
 
   }
 
-  showLoader(msg = null) {
+  showLoader(msg = 'Please wait...') {
     this.loadingController.create({
-      message: (msg) ? msg : 'Please wait...'
-    }).then((res) => {
+      message:msg,
+      cssClass:'loading',
+      showBackdrop: true,
+      mode: 'ios',
+      keyboardClose: true
+    }
+    ).then((res) => {
       this.loadingController.getTop().then(
-        (v) => v ? res.present() : null);
+        (v) => v ? res.present() : res.present());
       res.onDidDismiss().then((dis) => {
       });
     });
@@ -68,7 +73,7 @@ export class UiService {
 
     const modal = await this.modalController.create({
       component: StatusModalComponent,
-      componentProps: status,
+      componentProps:  status,
       cssClass: 'status-modal'
     });
     await modal.present();

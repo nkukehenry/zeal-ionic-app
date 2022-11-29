@@ -1,7 +1,7 @@
 ion-content{
    display: flex;
-   --background: var(--ion-background-color) url(../../../assets/images/auth-bg.jpg) no-repeat;
-   background-position: center;
+   --background: var(--ion-background-color);;
+    background-position: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -9,20 +9,31 @@ ion-content{
     margin-bottom: 0px!important;
    
     .top{
+      background-image: url(../../../assets/images/map.png);
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 50vh;
       position: relative;
-      background-color: var(--ion-color-primary-transparent);
+      background-color: var(--ion-color-primary);
+      padding-top: 20px;
+      border-bottom-right-radius: 30%;
+      border-bottom: 5px solid var(--ion-color-secondary);
       ion-slides{
-        top: 50px;
+        top: 10px;
         width: 100%;
         ion-slide{
-          font-size: 0.8rem;
+          font-size: 1rem;
           text-align: justify;
-          color: rgb(241, 243, 234);
-          padding:20px
+          color: rgb(211, 211, 211);
+          padding:20px;
+
+          p{
+            border-top: 1px solid var(--ion-color-secondary);
+            border-bottom: 1px solid var(--ion-color-secondary);
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
         }
       }
       .heading{
@@ -48,7 +59,6 @@ ion-content{
       justify-content: center;
       min-height: 50vh;
       background-color: #fff;
-      border-top: 3px solid var(--ion-color-secondary);
       p{
         padding: 4px;
         margin: 0px;

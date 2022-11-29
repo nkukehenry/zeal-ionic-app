@@ -1,3 +1,21 @@
-<p>
-  {{transaction.currency}}
-</p>
+
+<div class="wrapper">
+  <div class="top">
+    <ion-row>
+      <ion-col size="2">
+        <img class="flag" src="{{'data:image/jpg;base64,' + transaction.currency_pair.quote_currency.country.flag}}" />
+      </ion-col>
+      <ion-col size="5">
+        <span class="tran_title">  {{transaction.currency_pair.base_currency.code}}/{{transaction.currency_pair.quote_currency.code}}
+        </span>
+        <span class="tran_val">1 {{transaction.currency_pair.quote_currency.code}} = {{transaction.currency_pair.base_currency.code}} {{transaction.price_booked}}</span>
+        <span class="tran_val"><br><strong>{{transaction.created_at}}</strong></span>
+      </ion-col>
+      <ion-col size="5">
+        <span class="amount_label">{{transaction.currency_pair.quote_currency.symbol}}{{ transaction.base_amount | number }}</span>
+        <span class="status_label">{{transaction.tran_status}}</span>
+      </ion-col>
+    </ion-row>
+    
+  </div>
+</div>

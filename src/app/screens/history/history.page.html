@@ -1,15 +1,21 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Curency Exchange</ion-title>
+    <ion-title>Transaction History</ion-title>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="rate-board">
-    <div class="title"><small><ion-icon name="reload-outline"></ion-icon> Last updated 2 minutes ago</small></div>
-    <app-currencypair *ngFor="let pair of mainPairs" [currencyPair]="pair"></app-currencypair>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="ion-content-scroll-host ion-padding">
+    <div class="rate-board">
+      <div class="title"><small><ion-icon name="reload-outline"></ion-icon> Pull to refresh</small></div>
+      <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction" (click)="showDetails(transaction)"></app-transaction>
+    </div>
   </div>
 </ion-content>
 
