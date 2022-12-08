@@ -24,12 +24,13 @@ export class TransactService extends BaseService {
   postOrder(request: any): Observable<any> {
 
     let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/form-data');
+    headers = headers.set('Content-Type', 'multipart/form-data');
+    // request,{headers:headers}
 
-    return this.http.post(this.postClientOrderUrl(), request,{headers:headers})
+    return this.http.post(this.postClientOrderUrl(),request)
       .pipe(
       tap(_ => this.log('response received')),
-        catchError(this.handleError('getTransactions', []))
+        catchError(this.handleError('postOrder', []))
       );
   }
 

@@ -1,0 +1,32 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Registration Verification</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header><ion-content>
+  <div class="top">
+    <h2 class="heading">
+      Zeal <span>Pesa</span>
+    </h2>
+
+  </div>
+  <div class="bottom">
+
+    <form #verifyregistrationForm="ngForm">
+   
+    <p class="error" *ngIf="(otp.touched || otp.dirty) && !otp.valid">Provide a valid OTP</p>
+    <ion-item class="form-control">
+      <ion-label for="otp" position="floating">Enter OTP</ion-label>
+      <ion-input [type]="passType" minlength="4" #otp="ngModel" name="otp" [(ngModel)]="data.otp" id="otp" required></ion-input>
+      <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
+   </ion-item>
+   <small>Enter the OTP we have sent to your email and mobile number.</small>
+    <br>
+    <ion-button color="secondary" (click)="doVerifyRegistration()" [disabled]="!verifyregistrationForm.valid" mode="ios" expand="block">SUBMIT</ion-button>
+  
+   
+  </form>
+  </div>
+</ion-content>

@@ -11,7 +11,7 @@
   <div class="greeting">
     <ion-row>
       <ion-col size="12">
-        Hello {{ user.name }}
+        Hello {{ user.client_kyc.first_name }}
         <p><small>Account Number: </small><br> #0045657</p>
       </ion-col>
     </ion-row>
@@ -25,7 +25,7 @@
   </div>
 
   <div class="rate-board">
-    <div class="title"><small><ion-icon name="reload-outline"></ion-icon> Last updated 2 minutes ago</small></div>
+    <div class="sub-title"><small><ion-icon name="reload-outline"></ion-icon> Last updated 2 minutes ago</small></div>
     <app-currencypair *ngFor="let pair of mainPairs" [currencyPair]="pair" ></app-currencypair>
   </div>
 

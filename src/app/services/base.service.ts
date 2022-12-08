@@ -23,7 +23,9 @@ export class BaseService {
     //Endpoints
     //auth
     public postRegistrationUrl = () => `${this.apiUrl}account/register`;
-    public getLoginUrl = () => `${this.apiUrl}account/login`;
+    public postVerifyRegistraionUrl = () => `${this.apiUrl}account/verify`;
+    public postLoginUrl = () => `${this.apiUrl}account/login`;
+    public postVerifyLoginUrl = () => `${this.apiUrl}account/secondfactor`;
     
     public getResourcesUrl   = ()    => `${this.apiUrl}forex/resources`;
     public getTransactionsUrl = ()   => `${this.apiUrl}transaction`;

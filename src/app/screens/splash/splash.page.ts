@@ -24,26 +24,26 @@ export class SplashPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.menu.enable(false);
-    this.handleBack();
-    this.route ='tabs';
-    setTimeout(() => { this.login(); }, 3000);
+    //this.handleBack();
+    this.route ='login';
+    this.goTo();
+   // setTimeout(() => { this.login(); }, 3000);
   }
 
-  handleBack() {
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      // console.log('Handler was called! on ' + this.router.url);
+  // handleBack() {
+  //   this.platform.backButton.subscribeWithPriority(10, () => {
+  //     // console.log('Handler was called! on ' + this.router.url);
 
-      if (this.router.url === '/tabs/home' || this.router.url === '/splash') {
+  //     if (this.router.url === '/tabs/home' || this.router.url === '/splash') {
 
-        // navigator['app'].exitApp();
+  //       // navigator['app'].exitApp();
 
-      } else {
-        this.navCtrl.back();
-      }
-    });
+  //     } else {
+  //       this.navCtrl.back();
+  //     }
+  //   });
 
-  }
+  // }
 
   login() {
     // this.authService.authState.subscribe(state => {

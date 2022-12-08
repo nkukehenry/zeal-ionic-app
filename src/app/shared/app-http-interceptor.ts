@@ -36,6 +36,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
       });
     }
     request = request.clone({
+      headers: request.headers.set('timeout',`${20000}`)
+    })
+
+    request = request.clone({
       headers: request.headers.set('Accept', 'application/json')
     });
 

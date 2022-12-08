@@ -1,0 +1,63 @@
+<ion-header translucent>
+    <ion-toolbar color="primary">
+      <ion-title>My Account Details</ion-title>
+      <ion-buttons slot="start">
+        <ion-button (click)="closeModal()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+    <div class="main_content_div">
+        
+        <div class="back_image" [style.backgroundImage]="'url(assets/images/dash.jpg)'">
+            <div class="overlay_div">
+                <div class="user_back" [style.backgroundImage]="'url('+imageUrl+'uploads/users/'+ user.client_kyc.profile_photo+')'"></div>
+                <ion-label class="name_lbl">Henry Nkuke</ion-label>
+                <ion-label class="white_lbl">{{ user.ref_no }} </ion-label>
+            </div>
+        </div>
+
+        <div class="content_div">
+            
+            <div class="white_box" style="margin-top: -50px;">
+
+                <div class="item_div">
+                    <ion-label>First Name</ion-label>
+                    <p class="text-primary">{{ user.client_kyc.first_name }}</p>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Last Name</ion-label>
+                    <p class="text-primary">{{ user.client_kyc.last_name }}</p>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Email</ion-label>
+                    <p class="text-primary">{{ user.client_kyc.email }}</p>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Address</ion-label>
+                    <p class="text-primary">{{user.client_kyc.address}}</p>
+                </div>
+
+                <h5>Identification Document</h5>
+                <div class="item_div">
+                    <ion-label>ID Document Type</ion-label>
+                    <p class="text-primary">{{user.client_kyc.identification_type}}</p>
+                </div>
+
+                <div class="item_div">
+                    <ion-label>Document Number</ion-label>
+                    <p class="text-primary">{{user.client_kyc.nin}}</p>
+                </div>
+              
+              
+            </div>
+
+        </div>
+
+        </div>
+
+</ion-content>

@@ -5,8 +5,23 @@ import { ProfilePage } from './profile.page';
 
 const routes: Routes = [
   {
+    path: 'profile',
+    component: ProfilePage,
+    children: [
+      {
+            path: 'beneficiaries',
+            loadChildren: () => import('../../screens/beneficiaries/beneficiaries.module').then(m => m.BeneficiariesPageModule)
+      },
+      {
+        path: 'refferals',
+        loadChildren: () => import('../../screens/refferals/refferals.module').then(m => m.RefferalsPageModule)
+      }
+    ]
+  },
+  {
     path: '',
-    component: ProfilePage
+    redirectTo: 'profile',
+    pathMatch: 'full'
   }
 ];
 

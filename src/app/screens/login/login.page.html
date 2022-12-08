@@ -31,7 +31,12 @@
       <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
    </ion-item>
     <br>
-    <ion-button color="secondary" (click)="doLogin()" [disabled]="!loginForm.valid" mode="ios" expand="block">LOGIN</ion-button>
+    <ion-button color="primary" (click)="doLogin()" [disabled]="!loginForm.valid" mode="ios" expand="block">LOGIN</ion-button>
+  
+    <br>
+    <small>Don't have an account yet?</small>
+    <ion-button color="secondary" (click)="goToRegister()"  mode="ios" expand="block" fill="outline">Register</ion-button>
+  
   </form>
   </div>
 </ion-content>

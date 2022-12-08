@@ -14,8 +14,10 @@ import { PurposeSelectComponent } from 'src/app/components/purpose-select/purpos
 import { SourceSelectComponent } from 'src/app/components/source-select/source-select.component';
 import { TranDetailComponent } from 'src/app/components/trandetail/trandetail.component';
 import { PricesService } from 'src/app/services/prices.service';
-import { CurrencyMaskModule } from "ng2-currency-mask";
 import { TranferOptionSelectComponent } from 'src/app/components/tranferoption-select/tranferoption-select.component';
+import { KycComponent } from 'src/app/components/kyc/kyc.component';
+import { ImagePicker } from '@awesome-cordova-plugins/image-picker/ngx';
+import { ActionSheet } from '@awesome-cordova-plugins/action-sheet/ngx';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,12 @@ import { TranferOptionSelectComponent } from 'src/app/components/tranferoption-s
     PurposeSelectComponent,
     SourceSelectComponent,
     TranDetailComponent,
-    TranferOptionSelectComponent
+    TranferOptionSelectComponent,
+    KycComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   
   providers:[
@@ -39,7 +42,9 @@ import { TranferOptionSelectComponent } from 'src/app/components/tranferoption-s
     AuthenticationService,
     ForexService,
     ImageService,
-    PricesService
+    PricesService,
+    ImagePicker,
+    ActionSheet
   ],
   exports: [
     CurrencypairComponent,
@@ -50,7 +55,8 @@ import { TranferOptionSelectComponent } from 'src/app/components/tranferoption-s
     PurposeSelectComponent,
     SourceSelectComponent,
     TranDetailComponent,
-    TranferOptionSelectComponent
+    TranferOptionSelectComponent,
+    KycComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })

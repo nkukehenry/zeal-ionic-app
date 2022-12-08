@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class StatusModalComponent implements OnInit {
 
-  @Input() status:any;
+  status:any;
 
   constructor(private modalController: ModalController) { }
 

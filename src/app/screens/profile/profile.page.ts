@@ -1,5 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { KycComponent } from 'src/app/components/kyc/kyc.component';
+import { ModalController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,25 +12,25 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProfilePage implements OnInit {
 
-    constructor(private router: Router) { }
+    constructor(private dataService:DataService, private router: Router,private  modalController: ModalController) { }
 
     ngOnInit() {
     }
 
-    goToReview() {
-        this.router.navigate(['/review']);
+    showBeneficiaries() {
+        this.router.navigate(['/beneficiaries']);
     }
 
-    goToWishlist() {
-        this.router.navigate(['/wishlist']);
+    showRefferals() {
+        this.router.navigate(['/refferals']);
     }
 
-    goToAddresses() {
-        this.router.navigate(['/addresses']);
+    showLocations() {
+        this.router.navigate(['/contact']);
     }
 
     goToPassword() {
-        this.router.navigate(['/change-password']);
+        this.router.navigate(['/change-pass']);
     }
 
     goToLanguages() {
@@ -47,7 +50,16 @@ export class ProfilePage implements OnInit {
     }
 
     logout() {
+        this.dataService.user = {};
         this.router.navigate(['/']);
+    }
+
+    async showKyc(){
+        const modal = await this.modalController.create({
+            component: KycComponent,
+        });
+
+        await modal.present();
     }
 
 }

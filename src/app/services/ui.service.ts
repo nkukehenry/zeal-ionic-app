@@ -69,7 +69,7 @@ export class UiService {
 
   async statusModal(message:any, success = true) {
 
-    const status = { status: success, message };
+    const status = { status: success, message:message };
 
     const modal = await this.modalController.create({
       component: StatusModalComponent,

@@ -47,18 +47,26 @@ export class AuthenticationService extends BaseService {
 
   remoteLogin(request:any): Observable<any> {
     
-    return this.http.post(this.getLoginUrl(), request)
+    return this.http.post(this.postLoginUrl(), request)
       .pipe(
         tap(_ => this.log('response received')),
         catchError(this.handleError('remoteLogin', []))
       );
   }
 
-  saveProfileDEdit(request:any): Observable<any> {
-    return this.http.post(this.getLoginUrl(), request)
+verifyLogin(request:any): Observable<any> {
+    return this.http.post(this.postVerifyLoginUrl(), request)
       .pipe(
         tap(_ => this.log('response received')),
-        catchError(this.handleError('saveProfileDEdit', []))
+        catchError(this.handleError('verifyLogin', []))
+      );
+  }
+
+  verifyRegistration(request:any): Observable<any> {
+    return this.http.post(this.postVerifyRegistraionUrl(), request)
+      .pipe(
+        tap(_ => this.log('response received')),
+        catchError(this.handleError('verifyRegistration', []))
       );
   }
 
@@ -72,7 +80,7 @@ export class AuthenticationService extends BaseService {
     const user = window.localStorage.getItem('ZEAL_USER_INFO');
     this.dataService.cacheData('ZEAL_USER_INFO', this.user).then((response) => {
 
-      this.router.navigate(['tabs']);
+      this.router.navigate(['verify-login']);
       this.authState.next(true);
       
     });
@@ -84,6 +92,7 @@ export class AuthenticationService extends BaseService {
       this.authState.next(false);
     });
   }
+
   isAuthenticated() {
     return this.authState.value;
   }

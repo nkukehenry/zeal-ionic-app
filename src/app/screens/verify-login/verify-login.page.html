@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Login Verification</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header><ion-content>
+  <div class="top">
+    <h2 class="heading">
+      Zeal <span>Pesa</span>
+    </h2>
+
+  </div>
+  <div class="bottom">
+
+    <form #verifyloginForm="ngForm">
+   
+    <p class="error" *ngIf="(otp.touched || otp.dirty) && !otp.valid">Provide a valid OTP</p>
+    <ion-item class="form-control">
+      <ion-label for="otp" position="floating">Enter OTP</ion-label>
+      <ion-input [type]="passType" minlength="4" #otp="ngModel" name="otp" [(ngModel)]="data.otp" id="otp" required></ion-input>
+      <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
+   </ion-item>
+    <br>
+    <ion-grid class="inputs">
+      <ion-row>
+        <ion-col size="3" *ngFor="let i of [1,2,3,4]; let ind=index;">
+          <input type="number" (keyup)="setOtpField($event,i)" maxlength="1" value="{{ getOtpField(ind) }}" id="input{{ind+1}}"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button color="secondary" (click)="doVerifyLogin()" [disabled]="!verifyloginForm.valid" mode="ios" expand="block">SUBMIT</ion-button>
+  
+   
+  </form>
+  </div>
+</ion-content>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Currency Exchange</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -84,7 +84,7 @@
   <fieldset class="flexed">
     <legend>Proof of funds transfer</legend>
     <p class="text-grey">Attach bank proof of transfer</p>
-    <ion-img (click)="getImage()" class="attachment" [src]="filePreview"></ion-img>
+    <img (click)="getImage()" class="attachment" [src]="filePreview"/>
     <br>
 </fieldset>
 
@@ -111,11 +111,29 @@
       <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
     </ion-item>
 
+    <p class="error" *ngIf="(disburseAccount.touched || disburseAccount.dirty) && !disburseAccount.valid">A valid account is required</p>
+   
+    <ion-item>
+      <ion-label for="disburseAccount" position="stacked">
+        <ion-icon name="cash-outline"></ion-icon> 
+        ACCOUNT NO.</ion-label>
+      <ion-input 
+        minlength="2" type="tel" 
+        #disburseAccount="ngModel" name="disburseAccount" 
+       (keyup)="calculateEquivalent()" 
+       [(ngModel)]="data.disburseAccount"
+       currencyMask 
+        id="disburseAccount" required></ion-input>
+    </ion-item>
+
     <br>
 </fieldset>
 
 <br>
     <ion-button color="primary" (click)="submitOrder()" [disabled]="!regForm.valid" mode="ios" expand="block">Continue</ion-button>
+    <br>
+    <br>
+
   </form>
   </div>
 </ion-content>

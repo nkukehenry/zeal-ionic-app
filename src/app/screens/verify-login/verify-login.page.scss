@@ -1,0 +1,78 @@
+ion-content{
+   display: flex;
+   --background: var(--ion-background-color);;
+    background-position: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+   
+    .top{
+      background-image: url(../../../assets/images/map.png);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 20vh;
+      position: relative;
+      background-color: var(--ion-color-primary);
+      padding-top: 20px;
+      border-bottom: 5px solid var(--ion-color-secondary);
+     
+      .heading{
+        min-width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 17pt;
+        padding-bottom: 30px;
+        color: var(--ion-color-secondary);
+        span{
+          color: #fff;
+          font-weight: lighter;
+        }
+      }
+
+    }
+
+   
+
+    .bottom{
+      padding-top: 15%;
+      display: flex;
+      justify-content: center;
+      min-height: 50vh;
+      background-color: #fff;
+
+      .inputs{
+        display: none;
+        input{
+          width: 40px;
+          height: 40px;
+          border: none;
+          border-radius: 6px;
+          outline: none;
+          text-align: center;
+          border: 1px solid rgb(133, 132, 132);
+
+        }
+      }
+
+      p{
+        padding: 4px;
+        margin: 0px;
+      }
+      ion-label{
+        color:grey;
+      }
+      ion-icon{
+        font-size: 12pt;
+        color:var(--ion-color-primary);
+      }
+
+      ion-button{
+        margin-top: 15px;
+      }
+
+    }
+    
+}

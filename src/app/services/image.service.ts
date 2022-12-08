@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Camera, CameraResultType,Photo,CameraSource } from '@capacitor/camera';
 import { Filesystem,Directory } from '@capacitor/filesystem';
 import { Platform } from '@ionic/angular';
+import { ImagePicker } from '@awesome-cordova-plugins/image-picker/ngx';
+import { ActionSheet, ActionSheetOptions } from '@awesome-cordova-plugins/action-sheet/ngx';
+
 
 const IMAGE_DIR = "zeal-images";
 
@@ -11,7 +14,7 @@ const IMAGE_DIR = "zeal-images";
 
 export class ImageService {
 
-  constructor(private platform:Platform) { 
+  constructor(private platform:Platform,private imagePicker: ImagePicker,private actionSheet: ActionSheet) { 
 
   }
 
@@ -19,11 +22,56 @@ export class ImageService {
 
   async getPhoto(){
 
+  let buttonLabels = ['From Gallery', 'Take Photo'];
+
+  const options: ActionSheetOptions = {
+    title: 'Where do you want to pick your image from?',
+    subtitle: 'Choose image source',
+    buttonLabels: buttonLabels,
+    addCancelButtonWithLabel: 'Cancel'
+  }
+
+  let buttonIndex = await this.actionSheet.show(options);
+
+  console.log('choice',buttonIndex);
+
+  return (buttonIndex==1)?this.getGalleryPhoto():this.getCameraPhoto();
+
+  }
+
+  async getGalleryPhoto(){
+
+    
+    const options = {
+      source:CameraSource.Photos,
+      quality:90,
+      resultType:CameraResultType.Uri,
+      allowEditing:false
+    };
+    
+     let picked_images= await this.imagePicker.getPictures(options);
+
+    return new Promise(async (resolve,reject)=>{
+      
+        try{
+          if(!picked_images)
+            reject("Unable to get image");
+            resolve( await this.saveImage(picked_images[0]));
+        }catch(error){
+          console.log(error);
+        }
+
+     });
+   
+  }
+
+  async getCameraPhoto(){
+
     const image = await Camera.getPhoto({
       source:CameraSource.Camera,
       quality:90,
       resultType:CameraResultType.Uri,
-      allowEditing:false
+      allowEditing:false,
     });
 
     return new Promise(async (resolve,reject)=>{

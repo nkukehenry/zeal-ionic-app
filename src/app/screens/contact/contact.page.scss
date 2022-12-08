@@ -1,0 +1,32 @@
+.content{
+    background: var(--ion-background-color) url(../../../assets/images/map.png) no-repeat center center / contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center!important;
+    align-items: center!important;
+    min-height: 100vh;
+
+    p{
+      color: rgb(169, 168, 168);
+    }
+  
+    ion-img{
+      position: relative;
+      max-width: 45%;
+      margin: 0 auto;
+    }
+  
+    .footer-note{
+      display: flex;
+      position:absolute;
+      justify-content: center;
+      align-items: center;
+      bottom: 5px;
+      width: 100%;
+      color: grey;
+      font-weight: 100;
+    }
+
+   
+
+}

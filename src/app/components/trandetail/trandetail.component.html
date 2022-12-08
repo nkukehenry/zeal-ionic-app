@@ -13,7 +13,7 @@
         <div class="back_image" [style.backgroundImage]="'url(assets/images/dash.jpg)'">
             <div class="overlay_div">
                <ion-label class="name_lbl">{{ getBaseLabel(true) }} <ion-icon name="arrow-redo-outline"></ion-icon> {{ getEquivalentLabel(true) }}</ion-label>
-               <ion-label class="white_lbl">UGX 1,000,000</ion-label>
+               <ion-label class="white_lbl">{{ getBaseLabel() }} {{ transaction.base_amount | number }}</ion-label>
             </div>
         </div>
 

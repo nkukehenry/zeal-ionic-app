@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>My Beneficiaries</ion-title>
+
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+    <ion-card  *ngFor="let account of beneficiaries.cash_beneficiaries" >
+        <ion-card-content>
+            <ion-row>
+            <ion-col size="2">
+                <ion-img src="assets/images/avatar.png"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <h5>{{ account?.names || 'N/A' }}</h5>
+              <h6>{{ account?.account_no || 'N/A'}}</h6>
+            </ion-col>
+            </ion-row>
+            </ion-card-content>
+    </ion-card>
+
+    <ion-card  *ngFor="let account of beneficiaries.other_beneficiaries" >
+        <ion-card-content>
+        <ion-row>
+        <ion-col size="2">
+            <ion-img src="assets/images/avatar.png"></ion-img>
+        </ion-col>
+        <ion-col size="9">
+          <h5>{{ account?.names || 'N/A' }}</h5>
+          <h6>{{ account?.account_no || 'N/A'}}</h6>
+        </ion-col>
+        </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-img class="empty" src="assets/images/empty.svg"  *ngIf="(beneficiaries?.other_beneficiaries.length<1 && beneficiaries?.cash_beneficiaries.length<1) || !beneficiaries"></ion-img>
+        <h3 *ngIf="(beneficiaries?.other_beneficiaries.length<1 && beneficiaries?.cash_beneficiaries.length<1) || !beneficiaries">No beneficiaries</h3>
+  
+
+</ion-content>

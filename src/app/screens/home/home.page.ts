@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, NavController, Platform, ToastController } from '@ionic/angular';
-import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { App } from '@capacitor/app';
+import {  NavController, Platform, ToastController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { ForexService } from 'src/app/services/forex/forex.service';
-import { TransactService } from 'src/app/services/transact/transact.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class HomePage implements OnInit {
   
   widgets = [
     { name: 'Forex', icon: 'repeat-outline', link: 'tabs/tabs/forex' },
-    { name: 'Remittances', icon: 'push-outline', link: 'remit' },
+    { name: 'Remittances', icon: 'push-outline', link: 'remmit' },
     { name: 'Others', icon: 'qr-code-outline', link: 'other-services' }
   ];
 
@@ -35,6 +34,14 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    console.log(this.dataService.user);
+
+    if(!this.dataService.user){
+      this.router.navigate(['']);
+    }
+
+    this.user = this.dataService.user;
 
     this.getResources();
     this.handleBack();
@@ -62,13 +69,13 @@ export class HomePage implements OnInit {
   handleBack() {
     this.platform.backButton.subscribeWithPriority(10, () => {
 
-      if (this.router.url === '/tabs/home' || this.router.url === '/login' || this.router.url === '/register') {
+      if (this.router.url === '/tabs/tabs/home' || this.router.url === '/login' || this.router.url === '/') {
         if (this.exitcounter < 1
         ) {
           this.exitcounter++;
           this.showExitToast();
         } else {
-          //navigator['app'].exitApp();
+          App.exitApp();
         }
       } else {
         this.navCtrl.back();

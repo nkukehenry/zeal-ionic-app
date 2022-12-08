@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Change Password</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header><ion-content>
+  <div class="top">
+    <h2 class="heading">
+      Enter your new password
+    </h2>
+
+  </div>
+  <div class="bottom">
+
+    <form #verifyloginForm="ngForm">
+   
+    <p class="error" *ngIf="(newpass.touched || newpass.dirty) && !newpass.valid">Provide a valid password</p>
+    <ion-item class="form-control">
+      <ion-label for="newpass" position="floating">Enter Password</ion-label>
+      <ion-input [type]="passType" minlength="6" #newpass="ngModel" name="newpass" [(ngModel)]="data.newpass" id="newpass" required></ion-input>
+      <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
+   </ion-item>
+
+   <p class="error" *ngIf="(confirmpass.touched || confirmpass.dirty) && !confirmpass.valid">Provide password confirmation</p>
+   <ion-item class="form-control">
+     <ion-label for="confirmpass" position="floating">Confirm Password</ion-label>
+     <ion-input [type]="passType" minlength="6" #confirmpass="ngModel" name="confirmpass" [(ngModel)]="data.confirmpass" id="newpass" required></ion-input>
+     <ion-icon style="z-index: 2;" slot="end" (click)="toggleType()" name="eye"></ion-icon>
+  </ion-item>
+   
+    <ion-button color="primary" (click)="doChangePass()" [disabled]="!verifyloginForm.valid" mode="ios" expand="block">CHANGE PASSWORD</ion-button>
+  
+   
+  </form>
+  </div>
+</ion-content>

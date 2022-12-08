@@ -31,6 +31,31 @@ const MAIN_ROUTES = [
       {
         path: 'exchange',
         loadChildren: () => import('../screens/exchange/exchange.module').then(m => m.ExchangePageModule)
+      },
+      {
+        path: 'verify-login',
+        loadChildren: () => import('../screens/verify-login/verify-login.module').then(m => m.VerifyLoginPageModule)
+      },
+      {
+        path: 'beneficiaries',
+        loadChildren: () => import('../screens/beneficiaries/beneficiaries.module').then(m => m.BeneficiariesPageModule)
+      },
+      {
+        path: 'refferals',
+        loadChildren: () => import('../screens/refferals/refferals.module').then(m => m.RefferalsPageModule)
+      },
+      {
+        path: 'change-pass',
+        loadChildren: () => import('../screens/change-pass/change-pass.module').then(m => m.ChangePassPageModule)
+      },
+      {
+        path: 'remmit',
+        loadChildren: () => import('../screens/remmit/remmit.module').then(m => m.RemmitPageModule)
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('../screens/contact/contact.module').then(m => m.ContactPageModule)
       }
+      
 ];
 export default MAIN_ROUTES;

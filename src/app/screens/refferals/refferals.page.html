@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>My Refferals</ion-title>
+
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+    <ion-card  *ngFor="let account of refferals" >
+        <ion-card-content>
+            <ion-row>
+            <ion-col size="2">
+                <ion-img src="assets/images/avatar.png"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <h5>{{ account?.names || 'N/A' }}</h5>
+              <h6>{{ account?.account_no || 'N/A'}}</h6>
+            </ion-col>
+            </ion-row>
+            </ion-card-content>
+    </ion-card>
+
+    <ion-img class="empty" src="assets/images/empty.svg"  *ngIf="refferals.length<1 || !refferals"></ion-img>
+      <h3 *ngIf="refferals.length<1 || !refferals">No refferals</h3>
+
+</ion-content>

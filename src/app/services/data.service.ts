@@ -20,6 +20,10 @@ export class DataService {
   public isOpen:Boolean=false;
   public appData: any = {};
   public exchangePair = {};
+  public user:any = {};
+  public beneficiaries:any = [];
+  public refferals:any =[];
+  
   
 
   public preFix = "ZEAL-";
@@ -41,6 +45,7 @@ export class DataService {
       this.limits       = data.limits;
       this.defaultCurrencyId= data.default_currency_id;
       this.isOpen        = data.is_open;
+      this.beneficiaries = data.beneficiaries;
   }
 
   async cacheData(key='', data='') {

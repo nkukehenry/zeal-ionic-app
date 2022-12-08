@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BackgroundColorOptions, StatusBar } from '@capacitor/status-bar';
 import { MenuController, NavController, Platform, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { DataService } from 'src/app/services/data.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -28,37 +30,21 @@ export class LoginPage implements OnInit {
     private toastCtrl: ToastController,
     private navCtrl: NavController,
     private authService: AuthenticationService,
-    private uiService: UiService
+    private uiService: UiService,
+    private dataService: DataService
 
   ) { }
 
   ngOnInit() {
-    this.menu.enable(false);
-    this.handleBack();
-  }
 
-  toggleMenu() {
-    this.menu.toggle();
-  }
+    // const showStatusBar = async () => {
+    //   await StatusBar.show();
+    // };
 
-  handleBack() {
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      console.log('Handler was called! on ' + this.router.url);
-
-      if (this.router.url === '/home' || this.router.url === '/login') {
-        if (this.exitcounter < 1
-        ) {
-          this.exitcounter++;
-          this.showExitToast();
-        } else {
-          //navigator['app'].exitApp();
-        }
-      } else {
-        this.navCtrl.back();
-      }
-    });
+    
 
   }
+
 
   async showExitToast() {
     const toast = await this.toastCtrl.create({
@@ -81,6 +67,10 @@ export class LoginPage implements OnInit {
         this.uiService.hideLoader();
         if (response?.data) {
           this.authService.getIn(response.data);
+          this.dataService.user = response.data;
+        }else{
+          const msg = (response.message)?response.message:'Login failed due to an error,try again';
+          this.uiService.showAlert(msg);
         }
       }, error => {
         this.uiService.hideLoader();
@@ -92,5 +82,10 @@ export class LoginPage implements OnInit {
   toggleType() {
     this.passType = (this.passType === 'password') ? 'text' : 'password';
   }
+
+  goToRegister() {
+    this.router.navigate(['register']);
+  }
+
 
 }
