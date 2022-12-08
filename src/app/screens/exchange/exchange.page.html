@@ -11,7 +11,7 @@
   <div class="form">
 
     <form #regForm="ngForm">
-      <small class="text-bold">You are {{exchangePair.isSelling?'Selling':'Buying'}} {{exchangePair.quote_currency.name}}</small>
+      <h5 class="text-bold">You are now {{exchangePair.isSelling?'Selling':'Buying'}} {{exchangePair.quote_currency.name}}</h5>
       <h3 class="text-success">1 {{exchangePair.quote_currency.code}} =  {{exchangePair.base_currency.symbol}} {{exchangePair.selling_price | number}}</h3>
       
       <p class="error" *ngIf="(amount.touched || amount.dirty) && !amount.valid">A valid amount is required</p>
@@ -81,7 +81,7 @@
       <br>
   </fieldset>
 
-  <fieldset class="flexed">
+  <fieldset class="flexed col">
     <legend>Proof of funds transfer</legend>
     <p class="text-grey">Attach bank proof of transfer</p>
     <img (click)="getImage()" class="attachment" [src]="filePreview"/>
@@ -91,6 +91,15 @@
   <fieldset>
     <legend>Funds to You</legend>
     <p class="text-grey">How do you want to receive your funds?</p>
+
+    
+    <ion-item (click)="choosePurpose()">
+      <ion-label *ngIf="!data.funds_purpose">Purpose of funds</ion-label>
+      <ion-label *ngIf="data.funds_purpose">{{data.funds_purpose.description}}</ion-label>
+      <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+    </ion-item>
+
+
     <ion-item (click)="chooseChannel(true)">
       <ion-label *ngIf="!data.disburseChannel">Receive Funds Through</ion-label>
       <ion-label *ngIf="data.disburseChannel">{{data.disburseChannel.name}}</ion-label>
@@ -99,15 +108,11 @@
 
     <br>
 
+    <div *ngIf="!data.isPickup">
+
     <ion-item (click)="chooseBank(true)">
       <ion-label *ngIf="!data.disburseBank">Bank/Institution</ion-label>
       <ion-label *ngIf="data.disburseBank">{{data.disburseBank.name}}</ion-label>
-      <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
-    </ion-item>
-
-    <ion-item (click)="choosePurpose()">
-      <ion-label *ngIf="!data.funds_purpose">Purpose of funds</ion-label>
-      <ion-label *ngIf="data.funds_purpose">{{data.funds_purpose.description}}</ion-label>
       <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
     </ion-item>
 
@@ -125,8 +130,36 @@
        currencyMask 
         id="disburseAccount" required></ion-input>
     </ion-item>
+  </div>
 
-    <br>
+  <div *ngIf="data.isPickup">
+
+    
+    <div *ngIf="beneficiaries.cash_beneficiaries.length>0">
+      <h6>Choose From Previous Beneficiaries</h6>
+    <ion-card  *ngFor="let account of beneficiaries.cash_beneficiaries" >
+      <ion-card-content (click)="beneficiarySelected(account)" [class]="(account.selected)?'selected':''">
+        <h5>{{ account?.names || '' }}</h5>
+        <h6>{{ account?.account_no || ''}}</h6>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="data.splits.length>0">
+    <h6>Transaction Beneficiaries</h6>
+  <ion-card  *ngFor="let account of data.splits" >
+    <ion-card-content>
+      <h5>{{ account?.names || '' }}</h5>
+      <h6>{{ account?.phone_number || ''}}</h6>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+    <ion-button expand="block" (click)="addBeneficiary()" fill="outline" color="primary"><ion-icon name="add-circle-outline"></ion-icon> Add Benecifiary</ion-button>
+
+  </div>
+
+  <br>
 </fieldset>
 
 <br>

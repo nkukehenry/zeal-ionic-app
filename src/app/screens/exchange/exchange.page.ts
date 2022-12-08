@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonItem, MenuController, ModalController, NavController, Platform, ToastController } from '@ionic/angular';
+import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-beneficiary.component';
 import { BankSelectComponent } from 'src/app/components/bank-select/bank-select.component';
 import { ChannelSelectComponent } from 'src/app/components/channel-select/channel-select.component';
 import { IntroComponent } from 'src/app/components/intro/intro.component';
@@ -19,20 +20,17 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class ExchangePage implements OnInit {
 
-  data: any = {splits:[]};
+  data: any = {splits:[],isPickup:false};
   exchangePair:any  = {};
   accounts:any = [];
   transferOptions:any=[];
   isSelling:Boolean = false;
   filePreview = "../../../assets/images/file_add.webp";
   attachment:any;
+  beneficiaries:any = {};
 
   constructor(
-    private menu: MenuController,
     private router: Router,
-    private platform: Platform,
-    private toastCtrl: ToastController,
-    private navCtrl: NavController,
     private uiService: UiService,
     private dataService: DataService,
     private transactionService: TransactService,
@@ -44,6 +42,7 @@ export class ExchangePage implements OnInit {
   ngOnInit() {
      this.exchangePair = this.dataService.exchangePair;
      this.isSelling = this.exchangePair?.isSelling;
+     this.beneficiaries = this.dataService.beneficiaries;
 
      console.log(this.exchangePair);
   }
@@ -126,6 +125,14 @@ export class ExchangePage implements OnInit {
 
      }else{
       this.data.disburseChannel =item;
+      
+      if(parseInt(item.requires_pickup_identity)==1){
+        this.data.isPickup = true;
+        console.log(this.beneficiaries);
+      }else{
+        this.data.isPickup = false;
+      }
+
      }
 
      
@@ -265,12 +272,70 @@ export class ExchangePage implements OnInit {
 
     const image  = await this.imageService.getPhoto() as string;
 
-    this.filePreview = 'data:image/jpeg;base64,'+image;
+      this.filePreview = 'data:image/jpeg;base64,'+image;
 
-    const blob = this.imageService.base64toBlob(image);
-    //console.log(blob);
-    this.attachment = blob;
+      const blob = this.imageService.base64toBlob(image);
+      //console.log(blob);
+      this.attachment = blob;
 
+   }
+
+   async addBeneficiary(){
+
+    if(!this.data.funds_source){
+      this.uiService.showAlert("Please choose source of funds first!");
+      return;
+    }
+
+    let modal = await this.modalController.create({
+      component: AddBeneficiaryComponent,
+      cssClass:'item-select',
+      componentProps:{amount:this.data.amount}
+    });
+   
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+
+
+    if(data.data)
+      this.beneficiarySelected(data.data,true);
+   }
+
+   beneficiarySelected(beneficiary:any,newAdd=false){
+
+      console.log('beneficiary',beneficiary);
+
+      if(!newAdd){
+        this.beneficiaries.cash_beneficiaries.forEach( (elem:any) => {
+          
+          if(elem.account_no === beneficiary.account_no){
+            elem.selected=true;
+          }else{
+            elem.selected=false;
+          }
+
+        });
+
+      }else{
+
+        let disburseBank = this.dataService.banks.find( (item:any)=>parseInt(item.account_type_id)===parseInt(this.data.disburseChannel.id));
+
+        console.log('Beneficiary',beneficiary);
+
+        let split = {
+          account_type_id: this.data.disburseChannel.id,
+          bank_id: (disburseBank)?disburseBank.id:null,
+          account_no:'N/A',
+          amount:beneficiary.amount,
+          names:beneficiary.names,
+          phone_number:beneficiary.phoneNo,
+          funds_purpose:(this.data.funds_purpose)?this.data.funds_purpose.id:''
+        }
+  
+        this.data.splits.push(split);
+
+        console.log(this.data.splits);
+      }
    }
 
    submitOrder(){

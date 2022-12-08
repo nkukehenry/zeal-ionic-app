@@ -17,8 +17,7 @@
     
   </div>
   <div class="bottom">
-    
-    <ion-button fill="solid" size="small" color="danger" (click)="startExchange('exchange',true)">SELL USD</ion-button>
-    <ion-button fill="solid" size="small" color="success" (click)="startExchange('exchange',false)">BUY USD</ion-button>
-  </div>
+    <ion-button fill="solid" size="small" color="danger" (click)="startExchange('exchange',true)">NOW SELL {{ currencyPair.quote_currency.code }}</ion-button>
+    <ion-button fill="solid" size="small" color="success" (click)="startExchange('exchange',false)">NOW BUY {{ currencyPair.quote_currency.code }}</ion-button>
+   </div>
 </div>

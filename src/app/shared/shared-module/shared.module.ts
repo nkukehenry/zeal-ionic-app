@@ -18,6 +18,7 @@ import { TranferOptionSelectComponent } from 'src/app/components/tranferoption-s
 import { KycComponent } from 'src/app/components/kyc/kyc.component';
 import { ImagePicker } from '@awesome-cordova-plugins/image-picker/ngx';
 import { ActionSheet } from '@awesome-cordova-plugins/action-sheet/ngx';
+import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-beneficiary.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ActionSheet } from '@awesome-cordova-plugins/action-sheet/ngx';
     SourceSelectComponent,
     TranDetailComponent,
     TranferOptionSelectComponent,
-    KycComponent
+    KycComponent,
+    AddBeneficiaryComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { ActionSheet } from '@awesome-cordova-plugins/action-sheet/ngx';
     SourceSelectComponent,
     TranDetailComponent,
     TranferOptionSelectComponent,
-    KycComponent
+    KycComponent,
+    AddBeneficiaryComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })

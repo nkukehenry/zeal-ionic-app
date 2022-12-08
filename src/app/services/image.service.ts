@@ -43,23 +43,21 @@ export class ImageService {
 
     
     const options = {
-      source:CameraSource.Photos,
       quality:90,
-      resultType:CameraResultType.Uri,
-      allowEditing:false
+      outputType:1,
+      maximumImagesCount:1
     };
     
      let picked_images= await this.imagePicker.getPictures(options);
 
     return new Promise(async (resolve,reject)=>{
+
+      console.log('picture',picked_images);
       
-        try{
           if(!picked_images)
             reject("Unable to get image");
-            resolve( await this.saveImage(picked_images[0]));
-        }catch(error){
-          console.log(error);
-        }
+            resolve( picked_images[0]);
+       
 
      });
    

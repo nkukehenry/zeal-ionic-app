@@ -1,0 +1,45 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Add Benecficiary</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal(false)"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #benForm="ngForm" class="form">
+    <br>
+  <fieldset>
+    <legend>Enter Beneficiary Information</legend>
+    <ion-item>
+      <ion-label for="names" position="stacked">Full Name</ion-label>
+      <ion-input type="text" #names="ngModel" name="names" id="names" [(ngModel)]="data.names" required ngDefaultControl></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label for="idNo" position="stacked">ID Number</ion-label>
+      <ion-input type="text" #idNo="ngModel" name="idNo" id="idNo" [(ngModel)]="data.idNo" required ngDefaultControl></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label for="phoneNo" position="stacked">Phone Number</ion-label>
+      <ion-input type="tel" #phoneNo="ngModel" name="phoneNo" id="phoneNo" [(ngModel)]="data.phoneNo" required ngDefaultControl></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label for="amount" position="stacked">Amount</ion-label>
+      <ion-input type="number" #amount="ngModel" name="amount" id="amount" [(ngModel)]="data.amount" required ngDefaultControl></ion-input>
+    </ion-item>
+
+    <br>
+    <br>
+
+    <ion-button expand="block" fill="outline" color="primary" [disabled]="!benForm.valid" mode="ios" expand="block" (click)="closeModal(true)"><ion-icon name="add-circle-outline"></ion-icon> Add Benecifiary</ion-button>
+
+</fieldset>
+
+</form>
+
+ 
+  
+</ion-content>
