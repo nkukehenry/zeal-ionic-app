@@ -19,6 +19,8 @@ import { KycComponent } from 'src/app/components/kyc/kyc.component';
 import { ImagePicker } from '@awesome-cordova-plugins/image-picker/ngx';
 import { ActionSheet } from '@awesome-cordova-plugins/action-sheet/ngx';
 import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-beneficiary.component';
+import { CountrySelectComponent } from 'src/app/components/country-select/country-select.component';
+import { RemittanceService } from 'src/app/services/remittance/remittance.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-
     TranDetailComponent,
     TranferOptionSelectComponent,
     KycComponent,
-    AddBeneficiaryComponent
+    AddBeneficiaryComponent,
+    CountrySelectComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +46,7 @@ import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-
     Storage,
     AuthenticationService,
     ForexService,
+    RemittanceService,
     ImageService,
     PricesService,
     ImagePicker,
@@ -59,7 +63,8 @@ import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-
     TranDetailComponent,
     TranferOptionSelectComponent,
     KycComponent,
-    AddBeneficiaryComponent
+    AddBeneficiaryComponent,
+    CountrySelectComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })

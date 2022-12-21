@@ -23,6 +23,7 @@ export class DataService {
   public user:any = {};
   public beneficiaries:any = [];
   public refferals:any =[];
+  public remittance:any={};
   
   
 
@@ -47,6 +48,24 @@ export class DataService {
       this.isOpen        = data.is_open;
       this.beneficiaries = data.beneficiaries;
   }
+
+  updateRemitResources(data:any) {
+    
+    this.appData      = data;
+    this.mainPairs    = data.main_pairs;
+    this.crossPairs   = data.cross_pairs;
+    this.accounts     = data.accounts;
+    this.banks        = data.banks;
+    this.accountTypes = data.account_types;
+    this.currencies   = data.currencies;
+    this.fundPurposes = data.fund_purposes;
+    this.fundSources  = data.fund_sources;
+    this.pikupPoints  = data.pikup_points;
+    this.limits       = data.limits;
+    this.defaultCurrencyId= data.default_currency_id;
+    this.isOpen        = data.is_open;
+    this.beneficiaries = data.beneficiaries;
+}
 
   async cacheData(key='', data='') {
     return await this.storage.set(this.preFix + key, data);

@@ -11,14 +11,20 @@
   <div class="form">
 
     <form #regForm="ngForm">
+      <div *ngIf="remmitPair?.quote_currency">
+      <h5 class="text-bold">You are sending money to {{remmitPair.quote_currency.country.name}}</h5>
+      <h3 class="text-success">Rate: 1 {{remmitPair.quote_currency.code}} =  {{remmitPair.base_currency.symbol}} {{remmitPair.buying_price | number}}</h3>
+    </div>
+
       <p class="error" *ngIf="(amount.touched || amount.dirty) && !amount.valid">A valid amount is required</p>
     <ion-item>
       <ion-label for="amount" position="stacked">
         <ion-icon name="cash-outline"></ion-icon> 
-        ENTER AMOUNT</ion-label>
+        ENTER AMOUNT ({{remmitPair?.base_currency?.code}})</ion-label>
       <ion-input 
         minlength="2" type="tel" 
         #amount="ngModel" name="amount" 
+        (keyup)="calculateEquivalent()" 
        [(ngModel)]="data.amount"
        currencyMask 
         id="amount" required></ion-input>
@@ -42,7 +48,7 @@
   <fieldset>
       <legend>Funds Transfer to Zeal Pesa</legend>
     
-      <ion-item (click)="chooseChannel()">
+      <ion-item (click)="chooseChannel(false)">
         <ion-label *ngIf="!data.channel">Send Funds Through</ion-label>
         <ion-label *ngIf="data.channel">{{data.channel.name}}</ion-label>
         <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
@@ -107,9 +113,10 @@
       <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
     </ion-item>
 
-    <p class="error" *ngIf="(disburseAccount.touched || disburseAccount.dirty) && !disburseAccount.valid">A valid account is required</p>
+    <div *ngIf="!data.requirePickup">
+    <p  class="error" *ngIf="(disburseAccount.touched || disburseAccount.dirty) && !disburseAccount.valid">A valid account is required</p>
    
-    <ion-item>
+    <ion-item >
       <ion-label for="disburseAccount" position="stacked">
         <ion-icon name="cash-outline"></ion-icon> 
         ACCOUNT NO.</ion-label>
@@ -121,6 +128,22 @@
        currencyMask 
         id="disburseAccount" required></ion-input>
     </ion-item>
+
+  </div>
+
+  <div *ngIf="!data.requirePickup">
+  <ion-item (click)="chooseCity()">
+    <ion-label *ngIf="!data.city">Choose City</ion-label>
+    <ion-label *ngIf="data.city">{{data.city.name}}</ion-label>
+    <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+  </ion-item>
+
+  <ion-item (click)="chooseLocation()">
+    <ion-label *ngIf="!data.location">Choose Pickup Point</ion-label>
+    <ion-label *ngIf="data.location">{{data.location.location_name}}</ion-label>
+    <span slot="end"><ion-icon name="chevron-down-outline"></ion-icon></span>
+  </ion-item>
+</div>
 
     <br>
 </fieldset>

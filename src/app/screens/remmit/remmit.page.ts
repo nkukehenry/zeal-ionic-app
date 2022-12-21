@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { IonItem, MenuController, ModalController, NavController, Platform, ToastController } from '@ionic/angular';
 import { BankSelectComponent } from 'src/app/components/bank-select/bank-select.component';
 import { ChannelSelectComponent } from 'src/app/components/channel-select/channel-select.component';
+import { CountrySelectComponent } from 'src/app/components/country-select/country-select.component';
 import { IntroComponent } from 'src/app/components/intro/intro.component';
 import { PurposeSelectComponent } from 'src/app/components/purpose-select/purpose-select.component';
 import { SourceSelectComponent } from 'src/app/components/source-select/source-select.component';
 import { TranferOptionSelectComponent } from 'src/app/components/tranferoption-select/tranferoption-select.component';
 import { DataService } from 'src/app/services/data.service';
 import { ImageService } from 'src/app/services/image.service';
+import { RemittanceService } from 'src/app/services/remittance/remittance.service';
 import { TransactService } from 'src/app/services/transact/transact.service';
 import { UiService } from 'src/app/services/ui.service';
 
@@ -33,13 +35,54 @@ export class RemmitPage implements OnInit {
     private dataService: DataService,
     private transactionService: TransactService,
     private modalController:ModalController,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private nav: NavController,
+    private remittanceService: RemittanceService
+
 
   ) { }
 
   ngOnInit() {
      this.isSelling = this.remmitPair?.isSelling;
+     this.showCountrySelectModal();
+
   }
+
+  
+  getResources() {
+    this.uiService.showLoader();
+
+    this.remittanceService.getResources().subscribe(response => {
+      
+      this.uiService.hideLoader();
+      this.dataService.log(response);
+      this.dataService.updateRemitResources(response);
+
+    }, error => {
+      this.uiService.hideLoader();
+      this.dataService.log(error);
+    });
+  }
+  
+  async showCountrySelectModal(){
+  
+    const  modal = await this.modalController.create({
+      component:CountrySelectComponent,
+      componentProps:{countrys: this.dataService.mainPairs}
+    });
+
+    await modal.present();
+
+   const {data} = await modal.onWillDismiss();
+
+   if(data.data){
+    this.remmitPair = data.data;
+   }else{
+     this.nav.back();
+   }
+
+  }
+  
   
     async showBankSelectModal(){
   
@@ -54,16 +97,16 @@ export class RemmitPage implements OnInit {
 
 
   calculateEquivalent(){
-    return this.data.amount;
+    this.data.equivalent = this.data.amount/this.remmitPair.buying_price;
   }
 
 
   getEquivalentLabel(){
-      return "USD";
+      return this.remmitPair.quote_currency.symbol;
   }
 
   getBaseLabel(){
-     return "UGX";
+     return this.remmitPair.base_currency.symbol;
   }
 
 
@@ -98,8 +141,8 @@ export class RemmitPage implements OnInit {
 
     console.log(item);
     
-     if(!isDisburse){
-       this.data.channel =item;
+     if(isDisburse){
+       this.data.disburseChannel =item;
        this.accounts = this.dataService.accounts.filter( (itm:any)=>(itm.account_type_id == item.id && parseInt(itm.can_receive)==1));
        this.transferOptions = this.data.channel.transfer_options;
 
@@ -109,7 +152,7 @@ export class RemmitPage implements OnInit {
        }
 
      }else{
-      this.data.disburseChannel =item;
+      this.data.channel = item;
      }
 
      
@@ -239,6 +282,40 @@ export class RemmitPage implements OnInit {
     console.log(this.accounts);
 
    }
+
+  async chooseCity(){
+
+    
+    let modal = await this.modalController.create({
+      component: SourceSelectComponent,
+      cssClass:'item-select',
+      componentProps:{sources: this.dataService.fundSources}
+    });
+   
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+
+    if(data)
+     this.data.city = data.data;
+   }
+
+   async chooseLocation(){
+
+    
+    let modal = await this.modalController.create({
+      component: SourceSelectComponent,
+      cssClass:'item-select',
+      componentProps:{sources: this.dataService.fundSources}
+    });
+   
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+
+    if(data)
+     this.data.city = data.data;
+   }
+
+
 
    async getImage(){
 

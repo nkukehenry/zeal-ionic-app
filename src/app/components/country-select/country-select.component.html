@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Choose a Country</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal(false)"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="filtered.length<1">
+
+    <ion-item (click)="closeModal(country)" *ngFor="let country of countrys">
+  
+      <div class="app-country">
+        <h4><img class="flag" src="{{'data:image/jpg;base64,' + country.quote_currency.country.flag}}" /> {{ country.quote_currency.country.name }}</h4>
+      </div>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="filtered.length>0">
+
+    <ion-item (click)="closeModal(country)" *ngFor="let country of filtered">
+      
+      <div class="app-country">
+        <h4></h4>
+      </div>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

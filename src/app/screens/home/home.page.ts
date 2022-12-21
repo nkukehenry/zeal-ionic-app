@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
-import {  NavController, Platform, ToastController } from '@ionic/angular';
+import {  ModalController, NavController, Platform, ToastController } from '@ionic/angular';
+import { KycComponent } from 'src/app/components/kyc/kyc.component';
 import { DataService } from 'src/app/services/data.service';
 import { ForexService } from 'src/app/services/forex/forex.service';
 import { UiService } from 'src/app/services/ui.service';
@@ -18,9 +19,9 @@ export class HomePage implements OnInit {
   mainPairs: any = [];
   
   widgets = [
-    { name: 'Forex', icon: 'repeat-outline', link: 'tabs/tabs/forex' },
-    { name: 'Remittances', icon: 'push-outline', link: 'remmit' },
-    { name: 'Others', icon: 'qr-code-outline', link: 'other-services' }
+    { name: 'Forex', icon: 'exchange.svg', link: 'tabs/tabs/forex' },
+    { name: 'Send Money', icon: 'send.svg', link: 'remmit' },
+    { name: 'Other Services', icon: 'grid.svg', link: 'other-services' }
   ];
 
   constructor(
@@ -30,7 +31,8 @@ export class HomePage implements OnInit {
     private navCtrl: NavController,
     private dataService: DataService,
     private forexService: ForexService,
-    private uiService: UiService
+    private uiService: UiService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -102,6 +104,14 @@ export class HomePage implements OnInit {
 
   log(msg:any, key = '') {
     console.log(key, msg);
+  }
+
+  async goToKyc(){
+    const modal = await this.modalController.create({
+      component:KycComponent
+    });
+
+    await modal.present();
   }
 
 }

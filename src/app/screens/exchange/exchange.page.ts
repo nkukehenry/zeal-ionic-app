@@ -4,6 +4,7 @@ import { IonItem, MenuController, ModalController, NavController, Platform, Toas
 import { AddBeneficiaryComponent } from 'src/app/components/add-beneficiary/add-beneficiary.component';
 import { BankSelectComponent } from 'src/app/components/bank-select/bank-select.component';
 import { ChannelSelectComponent } from 'src/app/components/channel-select/channel-select.component';
+import { CountrySelectComponent } from 'src/app/components/country-select/country-select.component';
 import { IntroComponent } from 'src/app/components/intro/intro.component';
 import { PurposeSelectComponent } from 'src/app/components/purpose-select/purpose-select.component';
 import { SourceSelectComponent } from 'src/app/components/source-select/source-select.component';
@@ -35,19 +36,20 @@ export class ExchangePage implements OnInit {
     private dataService: DataService,
     private transactionService: TransactService,
     private modalController:ModalController,
-    private imageService: ImageService
-
+    private imageService: ImageService,
   ) { }
 
   ngOnInit() {
-     this.exchangePair = this.dataService.exchangePair;
-     this.isSelling = this.exchangePair?.isSelling;
+   
+     this.exchangePair  = this.dataService.exchangePair;
+     this.isSelling     = this.exchangePair?.isSelling;
      this.beneficiaries = this.dataService.beneficiaries;
 
      console.log(this.exchangePair);
   }
-  
-    async showBankSelectModal(){
+
+
+  async showBankSelectModal(){
   
       const  modal = await this.modalController.create({
         component:IntroComponent

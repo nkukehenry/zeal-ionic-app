@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header> 
   <ion-toolbar color="primary">
     <ion-title class="title">
       <span>Zeal</span>
@@ -13,13 +13,18 @@
       <ion-col size="12">
         Hello {{ user.client_kyc.first_name }}
         <p><small>Account Number: </small><br> #0045657</p>
-      </ion-col>
+       </ion-col>
     </ion-row>
   </div>
 
+ <div class="profile_alert" *ngIf="user.client_kyc?.is_complete==='0'">
+  <ion-button (click)="goToKyc()" fill="outline" color="secondary" expand="block"><ion-icon name="alert-circle-outline"></ion-icon> Complete Profile Setup</ion-button>
+   </div>
+  
   <div class="widgets">
     <ion-card class="widget" *ngFor="let widget of widgets" (click)="goTo(widget.link)" >
-      <ion-icon [name]=" widget.icon"></ion-icon>
+      <!-- <ion-icon [name]=" widget.icon"></ion-icon> -->
+      <ion-img [src]="'assets/icons/'+widget.icon"></ion-img>
       <span>{{ widget.name }}</span>
     </ion-card>
   </div>

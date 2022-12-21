@@ -1,5 +1,14 @@
 ion-content{
-    --background: var(--ion-background-color);;
+    //--background: var(--ion-background-color);
+    --background: var(--ion-background-color) url(../../../assets/images/policy-bg.svg) bottom no-repeat;
+   
+
+    .profile_alert{
+      padding: 10px 20px;
+      ion-icon{
+        margin-right: 20px;
+      }
+    }
 }
 .greeting{
     background-image: url(../../../assets/images/dash.jpg);
@@ -70,7 +79,8 @@ ion-content{
     color:gray;
     //var(--ion-color-primary);
     padding: 10px;
-    background-color: white;
+    background: white; 
+    //url(../../../assets/images/linen.png) cover no-repeat center;
     min-width: 46%;
     max-width: 46%;
     min-height: 120px;
@@ -82,6 +92,10 @@ ion-content{
       font-size: 3.7rem;
       color: var(--ion-color-secondary);
     }
+    ion-img{
+       max-width: 40%;
+    }
+
     span{
       font-size: 1.3rem;
     }
