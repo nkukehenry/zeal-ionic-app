@@ -78,7 +78,7 @@ export class DataService {
   }
 
   public log(message='') {
-    console.log(message);
+    //console.log(message);
   }
 
 }

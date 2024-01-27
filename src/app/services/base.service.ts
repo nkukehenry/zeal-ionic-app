@@ -11,10 +11,11 @@ import { LoadingController } from '@ionic/angular';
 
 export class BaseService {
 
-    public baseUrl = 'https://zealpesa.com/';
+    public baseUrl  = 'https://zeal.cashawo.com/';
     public oauthUrl = `${this.baseUrl}api/`;
-    public apiUrl = `${this.baseUrl}api/`;
+    public apiUrl   = `${this.baseUrl}api/`;
     user: any = {};
+    
     constructor() {
         const user = window.localStorage.getItem('USER_INFO');
         this.user = (user) ? JSON.parse(user) : {};
@@ -35,7 +36,7 @@ export class BaseService {
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
+           // console.error(error); // log to console instead
 
             // TODO: better job of transforming error for user consumption
             this.log(`${operation} failed: ${error.message}`);
